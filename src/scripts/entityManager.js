@@ -117,7 +117,7 @@ setDims: function(entities, dims) {
 },
 
 update: function(du) {
-
+	console.log("totz updating yo");
     for (var c = 0; c < this._categories.length; ++c) {
 
         var aCategory = this._categories[c];
