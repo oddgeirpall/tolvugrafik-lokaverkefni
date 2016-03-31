@@ -11,7 +11,7 @@ Evil, ugly (but "necessary") globals, which everyone can use.
 
 /* jshint browser: true, devel: true, globalstrict: true */
 
-var g_canvas = document.getElementById("myCanvas");
+var g_canvas = document.getElementById("gl-canvas");
 //var g_ctx = g_canvas.getContext("2d");
 
 // The "nominal interval" is the one that all of our time-based units are
@@ -24,6 +24,15 @@ var TERMINAL_VELOCITY = 10.5;
 
 // Multiply by this to convert seconds into "nominals"
 var SECS_TO_NOMINALS = 1000 / NOMINAL_UPDATE_INTERVAL;
+
+// Buffers
+var cubeBuffer;
+var roofBuffer;
+var numCubeVertices = 36;
+var numRoofVertices = 9;
+
+// Matrices
+var g_renderMatrix;
 
 
 // Prevent spacebar from scrolling page, esp. when console is open.
