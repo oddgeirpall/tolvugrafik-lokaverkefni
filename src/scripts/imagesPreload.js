@@ -57,7 +57,7 @@ Image.prototype.asyncLoad = function(src, asyncCallback) {
 function imagesPreload(requiredImages,
                        loadedImages,
                        completionCallback) {
-
+                           
     var numImagesRequired,
         numImagesHandled = 0,
         currentName,
@@ -112,4 +112,5 @@ function imagesPreload(requiredImages,
             currentImage.asyncLoad(requiredImages[currentName], preloadHandler);
         }
     }
+    completionCallback();
 }

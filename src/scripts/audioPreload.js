@@ -110,4 +110,5 @@ function audioPreload(requiredAudio,
             currentAudio.asyncLoad(requiredAudio[currentName], preloadHandler);
         }
     }
+    completionCallback();
 }

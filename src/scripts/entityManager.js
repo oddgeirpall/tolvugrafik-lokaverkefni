@@ -61,7 +61,7 @@ enterLevel: function(lvl) {
     
 
     if(this._character.length === 0) this.generateCharacter();
-    this._character[0].reset();
+    //this._character[0].reset();
 
     this._level = lvl;
     this.generateLevel({level: this._level});
@@ -74,7 +74,7 @@ giveMeZelda : function(descr) {
 },
 
 generateCharacter : function(descr) {
-    this._character.push(new Zelda(descr));
+    //this._character.push(new Zelda(descr));
 },
 
 generateEnemy : function(descr) {
@@ -82,7 +82,8 @@ generateEnemy : function(descr) {
 },
 
 generateLevel : function(descr) {
-    this._world.push(new World(descr));
+    //this._world.push(new World(descr));
+    console.log('level');
 },
 
 generateObject : function(name, descr) {

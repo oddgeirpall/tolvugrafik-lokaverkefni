@@ -1,125 +1,32 @@
-// util.js
-//
-// A module of utility functions, with no private elements to hide.
-// An easy case; just return an object containing the public stuff.
+// =======
+// GLOBALS
+// =======
+/*
+
+Evil, ugly (but "necessary") globals, which everyone can use.
+
+*/
 
 "use strict";
 
+/* jshint browser: true, devel: true, globalstrict: true */
 
-var util = {
+var g_canvas = document.getElementById("myCanvas");
+//var g_ctx = g_canvas.getContext("2d");
 
-// RESETS
-// ======
-
-resetEntityManager: function(){
-	//stuff to reset
-},
-
-
-
-// RANGES
-// ======
-
-clampRange: function(value, lowBound, highBound) {
-        if (value < lowBound) {
-    	value = lowBound;
-    } else if (value > highBound) {
-	value = highBound; 
-    }
-    return value;
-},
-
-wrapRange: function(value, lowBound, highBound) {
-    while (value < lowBound) {
-	value += (highBound - lowBound);
-    }
-    while (value > highBound) {
-	value -= (highBound - lowBound);
-    }
-    return value;
-},
-
-isBetween: function(value, lowBound, highBound) {
-    if (value < lowBound) { return false; }
-    if (value > highBound) { return false; }
-    return true;
-},
+// The "nominal interval" is the one that all of our time-based units are
+// calibrated to e.g. a velocity unit is "pixels per nominal interval"
+//
+var NOMINAL_UPDATE_INTERVAL = 16.666;
+var NOMINAL_GRAVITY = 0.52;
+var TERMINAL_VELOCITY = 10.5;
 
 
-// RANDOMNESS
-// ==========
-
-randRange: function(min, max) {
-    return (min + Math.random() * (max - min));
-},
+// Multiply by this to convert seconds into "nominals"
+var SECS_TO_NOMINALS = 1000 / NOMINAL_UPDATE_INTERVAL;
 
 
-// MISC
-// ====
-
-square: function(x) {
-    return x*x;
-},
-
-sumFirst: function(num, array){
-    var sum = 0;
-    for(var i=0; i< min(num,array.length) ; i++){
-        sum += array[i];
-    }
-    return sum;
-},
-
-
-// DISTANCES
-// =========
-
-distSq: function(x1, y1, x2, y2) {
-    return this.square(x2-x1) + this.square(y2-y1);
-},
-
-wrappedDistSq: function(x1, y1, x2, y2, xWrap, yWrap) {
-    var dx = Math.abs(x2-x1),
-	dy = Math.abs(y2-y1);
-    if (dx > xWrap/2) {
-	dx = xWrap - dx;
-    };
-    if (dy > yWrap/2) {
-	dy = yWrap - dy;
-    }
-    return this.square(dx) + this.square(dy);
-},
-
-
-// CANVAS OPS
-// ==========
-
-
-// Draw helper functions? 
-
-//=======
-// AUDIO
-//=======
-
-play: function (audio) {
-    audio.pause();
-    audio.currentTime = 0;
-    if (!g_isMuted) audio.play();
-},
-
-playLoop: function (audio) {
-    backgroundMusic.pause();
-    backgroundMusic = audio;
-	backgroundMusic.volume = Math.min(backgroundMusic.volume,0.5);
-    backgroundMusic.currentTime = 0;
-    if (!g_isMuted) {
-        try {
-            backgroundMusic.addEventListener('ended', function () {
-                this.currentTime = 0;
-                this.play();
-            });
-            backgroundMusic.play();
-        } catch(err) {}
-    };
+// Prevent spacebar from scrolling page, esp. when console is open.
+window.onkeydown = function(e) {
+	if(e.keyCode == " ".charCodeAt(0) || e.keyCode == 38 || e.keyCode == 40) e.preventDefault();
 }
-
-};

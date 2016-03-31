@@ -42,6 +42,10 @@ function updateSimulation(du) {
 		return;
     }
     */
+    if (g_newGame) {
+        g_newGame = false;
+        initLevel();
+    }
     entityManager.update(du); 
 
 }
@@ -77,6 +81,9 @@ function processDiagnostics() {
 // =================
 
 // GAME-SPECIFIC RENDERING
+var g_newGame = true;
+
+
 function renderSimulation(ctx) {
     entityManager.render();
 };
@@ -91,7 +98,7 @@ var g_audio = {};
 var backgroundMusic;
 
 function requestPreloads() {
-
+    console.log('requestPreloads');
     var requiredImages = {
 		//image paths
     };
@@ -134,7 +141,7 @@ function preloadDone() {
     //g_audio.coin.volume = 0.7;
     
     //menuScreen = g_sprites.menuBar;
-    
+    console.log('preloadDone');
     main.init();
     
     //backgroundMusic = g_audio.theme2;
@@ -144,14 +151,15 @@ function preloadDone() {
 
 function initLevel() {
 
+    console.log('initLevel');
     entityManager.enterLevel(1);
     
-    g_lvlLength = entityManager._world[0].blocks[13].length*(g_canvas.height/14) - g_canvas.width;
+    //g_lvlLength = entityManager._world[0].blocks[13].length*(g_canvas.height/14) - g_canvas.width;
     
-    backgroundMusic.pause();
+    //backgroundMusic.pause();
 	
-	g_audio.theme1.volume=0.1;
-    util.playLoop(g_audio.theme1);
+	//g_audio.theme1.volume=0.1;
+    //util.playLoop(g_audio.theme1);
 };
 
 // Kick it off
