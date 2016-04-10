@@ -78,7 +78,7 @@ generateCharacter : function(descr) {
 },
 
 generateEnemy : function(descr) {
-    this._enemies.push(new Enemy(descr));
+    this._enemies.push(new entity_car(descr));
 },
 
 generateLevel : function(descr) {
@@ -118,7 +118,7 @@ setDims: function(entities, dims) {
 },
 
 update: function(du) {
-	console.log("totz updating yo");
+	//console.log("totz updating yo");
     for (var c = 0; c < this._categories.length; ++c) {
 
         var aCategory = this._categories[c];
@@ -151,6 +151,7 @@ update: function(du) {
 },
 
 render: function() {
+    //console.log('is rendering');
     var debugX = 10, debugY = 100;
 
     for (var c = 0; c < this._categories.length; ++c) {

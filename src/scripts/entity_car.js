@@ -8,8 +8,7 @@ entity_car.prototype.x = Math.random()*g_canvas.width;
 entity_car.prototype.y = Math.random()*g_canvas.width;
 
 entity_car.prototype.update = function(du){
-	this.x = Math.random()*g_canvas.width;
-	this.y = Math.random()*g_canvas.width;
+	this.x += 5*du;
 };
 
 

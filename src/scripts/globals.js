@@ -26,13 +26,57 @@ var TERMINAL_VELOCITY = 10.5;
 var SECS_TO_NOMINALS = 1000 / NOMINAL_UPDATE_INTERVAL;
 
 // Buffers
-var cubeBuffer;
-var roofBuffer;
 var numCubeVertices = 36;
 var numRoofVertices = 9;
 
+var colorLoc;
+var mvLoc;
+var pLoc;
+var proj;
+
+var cubeBuffer;
+var trackBuffer;
+var roofBuffer;
+var vPosition;
+
+var gl;
+
 // Matrices
 var g_renderMatrix;
+
+// Verctices
+var cVertices = [
+    // front side:
+    vec3( -0.5,  0.5,  0.5 ), vec3( -0.5, -0.5,  0.5 ), vec3(  0.5, -0.5,  0.5 ),
+    vec3(  0.5, -0.5,  0.5 ), vec3(  0.5,  0.5,  0.5 ), vec3( -0.5,  0.5,  0.5 ),
+    // right side:
+    vec3(  0.5,  0.5,  0.5 ), vec3(  0.5, -0.5,  0.5 ), vec3(  0.5, -0.5, -0.5 ),
+    vec3(  0.5, -0.5, -0.5 ), vec3(  0.5,  0.5, -0.5 ), vec3(  0.5,  0.5,  0.5 ),
+    // bottom side:
+    vec3(  0.5, -0.5,  0.5 ), vec3( -0.5, -0.5,  0.5 ), vec3( -0.5, -0.5, -0.5 ),
+    vec3( -0.5, -0.5, -0.5 ), vec3(  0.5, -0.5, -0.5 ), vec3(  0.5, -0.5,  0.5 ),
+    // top side:
+    vec3(  0.5,  0.5, -0.5 ), vec3( -0.5,  0.5, -0.5 ), vec3( -0.5,  0.5,  0.5 ),
+    vec3( -0.5,  0.5,  0.5 ), vec3(  0.5,  0.5,  0.5 ), vec3(  0.5,  0.5, -0.5 ),
+    // back side:
+    vec3( -0.5, -0.5, -0.5 ), vec3( -0.5,  0.5, -0.5 ), vec3(  0.5,  0.5, -0.5 ),
+    vec3(  0.5,  0.5, -0.5 ), vec3(  0.5, -0.5, -0.5 ), vec3( -0.5, -0.5, -0.5 ),
+    // left side:
+    vec3( -0.5,  0.5, -0.5 ), vec3( -0.5, -0.5, -0.5 ), vec3( -0.5, -0.5,  0.5 ),
+    vec3( -0.5, -0.5,  0.5 ), vec3( -0.5,  0.5,  0.5 ), vec3( -0.5,  0.5, -0.5 )
+];
+
+var rVertices = [
+    // Front triangle:
+    vec3( -0.5, -0.5,  0.5 ), vec3( 0.0,  0.0,  0.5 ), vec3( 0.5, -0.5, 0.5 ),
+    // Right rectangle:
+    vec3(  0.0,  0.0, -0.5 ), vec3( 0.5, -0.5, -0.5 ),
+    // Back triangle:
+    vec3( -0.5, -0.5, -0.5 ), vec3( 0.0,  0.0, -0.5 ),
+    // Left rectangle:
+    vec3( -0.5, -0.5,  0.5 ), vec3( 0.0,  0.0,  0.5 )
+];
+
 
 
 // Prevent spacebar from scrolling page, esp. when console is open.

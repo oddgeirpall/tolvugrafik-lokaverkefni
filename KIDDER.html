@@ -1,5 +1,15 @@
 <html>
 
+<body>
+<br/>
+
+<canvas id="gl-canvas" width="800" height="800" style="border: 1px solid black;">
+	Sorry, but your browser does not support the HTML5 canvas tag.
+</canvas>
+
+</body>
+
+
 <script id="vertex-shader" type="x-shader/x-vertex">
 
 attribute  vec4 vPosition;
@@ -33,6 +43,7 @@ main()
 <script type="text/javascript" src="src/Common/initShaders.js"></script>
 <script type="text/javascript" src="src/Common/MV.js"></script>
 
+<script type="text/javascript" src="src/scripts/globals.js"></script>
 <script type="text/javascript" src="src/scripts/handleMouse.js"></script>
 <script type="text/javascript" src="src/scripts/keys.js"></script>
 <script type="text/javascript" src="src/scripts/audioPreload.js"></script>
@@ -41,7 +52,6 @@ main()
 <script type="text/javascript" src="src/scripts/entity_car.js"></script>
 <script type="text/javascript" src="src/scripts/entity_floater.js"></script>
 <script type="text/javascript" src="src/scripts/entity_kid.js"></script>
-<script type="text/javascript" src="src/scripts/globals.js"></script>
 <script type="text/javascript" src="src/scripts/entityManager.js"></script>
 <script type="text/javascript" src="src/scripts/update.js"></script>
 <script type="text/javascript" src="src/scripts/render.js"></script>
@@ -50,12 +60,4 @@ main()
 <script type="text/javascript" src="src/scripts/KIDDER_GAME.js"></script>
 
 
-<body>
-<br/>
-
-<canvas id="gl-canvas" width="800"" height="800">
-Oops ... your browser doesn't support the HTML5 canvas element
-</canvas>
-
-</body>
 </html>
