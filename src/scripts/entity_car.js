@@ -4,20 +4,24 @@ function entity_car(descr) {
     }
 }
 
+entity_car.prototype = new Entity();
+
 entity_car.prototype.x = Math.random()*g_canvas.width;
 entity_car.prototype.y = Math.random()*g_canvas.width;
 
 entity_car.prototype.update = function(du){
-	this.x += 5*du;
+	//this.x += 5*du;
+    //console.log('entity_car updating');
 };
 
 
 entity_car.prototype.render = function draw() {
+    //console.log('entity_car rendering');
     
     //Draw the walls first
-    gl.uniform4fv( colorLoc, YELLOW ); // Set color to yellow
+    gl.uniform4fv( colorLoc, vec4(1.0, 1.0, 0, 1.0) ); // Set color to yellow
     
-    var mvW = mult( g_renderMatrix,  translate( this.x, y,  10/2 ) );
+    var mvW = mult( g_renderMatrix,  translate( 100, 50,  10/2 ) );
     mvW = mult( mvW, scalem( 10, 10, 10 ) );
 
     gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
@@ -27,9 +31,9 @@ entity_car.prototype.render = function draw() {
     gl.drawArrays( gl.TRIANGLES, 0, numCubeVertices );
     
     // Then draw the roof
-    gl.uniform4fv( colorLoc, RED ); // Set color to red
+    gl.uniform4fv( colorLoc, vec4(1.0, 1.0, 0.0, 1.0) ); // Set color to red
     
-    var mvR = mult( g_renderMatrix,  translate( this.x, y, 3*10/2 ) );
+    var mvR = mult( g_renderMatrix,  translate( 0, 0, 3*10/2 ) );
     mvR = mult( mvR, scalem( 10, 10, 10 ) );
     mvR = mult( mvR, rotateX(-90));
     
@@ -37,6 +41,6 @@ entity_car.prototype.render = function draw() {
     gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
     
     gl.uniformMatrix4fv(mvLoc, false, flatten(mvR) );
-    gl.drawArrays( gl.TRIANGLE_STRIP, 0, numRoofVertices );
+    //gl.drawArrays( gl.TRIANGLE_STRIP, 0, numRoofVertices );
     
 };

@@ -82,7 +82,13 @@ function processDiagnostics() {
 var g_newGame = true;
 
 
-function renderSimulation(ctx) {
+function renderSimulation() {
+    
+    gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    
+    g_renderMatrix = mat4();
+    g_renderMatrix = lookAt( vec3(250.0, 0.0, 100.0), vec3(0.0, 0.0, 0.0), vec3(0.0, 0.0, 1.0) );
+    
     entityManager.render();
 };
 

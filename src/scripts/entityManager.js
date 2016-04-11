@@ -62,6 +62,8 @@ enterLevel: function(lvl) {
 
     if(this._character.length === 0) this.generateCharacter();
     //this._character[0].reset();
+    
+    this.generateEnemy();
 
     this._level = lvl;
     this.generateLevel({level: this._level});
@@ -79,6 +81,7 @@ generateCharacter : function(descr) {
 
 generateEnemy : function(descr) {
     this._enemies.push(new entity_car(descr));
+    console.log(this._enemies);
 },
 
 generateLevel : function(descr) {
@@ -169,4 +172,3 @@ render: function() {
 
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();
-
