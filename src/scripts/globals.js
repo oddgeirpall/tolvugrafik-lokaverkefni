@@ -78,6 +78,9 @@ var rVertices = [
 ];
 
 
+var g_laneHeight = 30;
+
+
 
 // Prevent spacebar from scrolling page, esp. when console is open.
 window.onkeydown = function(e) {

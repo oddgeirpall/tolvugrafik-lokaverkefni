@@ -63,7 +63,12 @@ enterLevel: function(lvl) {
     if(this._character.length === 0) this.generateCharacter();
     //this._character[0].reset();
     
-    this.generateEnemy();
+    for (var i = 0; i < 5; i++) {
+        this.generateEnemy({
+            x : util.randRange(-100, 100),
+            y : -190 + i*75
+        });
+    }
 
     this._level = lvl;
     this.generateLevel({level: this._level});
@@ -81,7 +86,7 @@ generateCharacter : function(descr) {
 
 generateEnemy : function(descr) {
     this._enemies.push(new entity_car(descr));
-    console.log(this._enemies);
+    //console.log(this._enemies);
 },
 
 generateLevel : function(descr) {
