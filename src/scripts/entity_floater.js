@@ -34,7 +34,6 @@ entity_floater.prototype.update = function(du){
 										Math.abs(70 - this.counter);
 									}
 		if		(this.counter < 57)	this.deadly 	= false;
-		console.log(this.z);
 	} 	else 						this.deadly 	= false;
 
     this.x += du;
@@ -46,6 +45,7 @@ entity_floater.prototype.render = function draw() {
     
     //Draw the walls first
     if(this.deadly) gl.uniform4fv( colorLoc, [1,0,1,1] );
+	else if(this.sucker) gl.uniform4fv( colorLoc, [1,1,0,1] );
 	else gl.uniform4fv( colorLoc, [0,1,0,1] );
 	
     var mvW = mult( g_renderMatrix,  translate( this.x, this.y,  this.z ) );
