@@ -28,6 +28,12 @@ var SECS_TO_NOMINALS = 1000 / NOMINAL_UPDATE_INTERVAL;
 // Buffers
 var numCubeVertices = 36;
 var numRoofVertices = 9;
+var numGroundVertices = 240;
+var numCar1Vertices = 90;
+var numCar2Vertices = 138;
+var numCar3Vertices = 321;
+var numCar4Vertices = 321;
+var numKidVertices = 48;
 
 var colorLoc;
 var mvLoc;
@@ -40,10 +46,26 @@ var roofBuffer;
 var vPosition;
 var groundBuffer;
 
+var car3Buffer;
+var car2Buffer;
+var car1Buffer;
+var car4Buffer;
+var kidBuffer;
+
 var gl;
 
 var GroundVertices = [];
 var GroundNormals = [];
+var car1Vertices = [];
+var car1Normals = [];
+var car2Vertices = [];
+var car2Normals = [];
+var car3Vertices = [];
+var car3Normals = [];
+var car4Vertices = [];
+var car4Normals = [];
+var kidVertices = [];
+var kidNormals = [];
 
 // Matrices
 var g_renderMatrix;

@@ -124,10 +124,23 @@ main.init = function () {
 	    // get models
     var PR = PlyReader();
     var plyData = PR.read("src/images/ground.ply");
-
     GroundVertices = plyData.points;
     GroundNormals = plyData.normals;
-
+	plyData = PR.read("src/images/carrot.ply");
+    car1Vertices = plyData.points;
+    car1Normals = plyData.normals;
+	plyData = PR.read("src/images/Brokoli.ply");
+    car2Vertices = plyData.points;
+    car2Normals = plyData.normals;
+	plyData = PR.read("src/images/Tomato.ply");
+    car3Vertices = plyData.points;
+    car3Normals = plyData.normals;
+	plyData = PR.read("src/images/Tomato.ply");
+    car4Vertices = plyData.points;
+    car4Normals = plyData.normals;
+	plyData = PR.read("src/images/kid.ply");
+    kidVertices = plyData.points;
+    kidNormals = plyData.normals;
     //
     //  Load shaders and initialize attribute buffers
     //
@@ -135,10 +148,36 @@ main.init = function () {
     gl.useProgram( program );
 
 	
+	
 		 // VBO for groundStuff
     groundBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, groundBuffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(GroundVertices), gl.STATIC_DRAW );
+	
+	
+	
+		 // VBO for All the Cars
+    car1Buffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER,car1Buffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(car1Vertices), gl.STATIC_DRAW );
+	
+	car2Buffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER,car2Buffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(car2Vertices), gl.STATIC_DRAW );
+	
+	car3Buffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER,car3Buffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(car3Vertices), gl.STATIC_DRAW );
+	
+	car4Buffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER,car4Buffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(car4Vertices), gl.STATIC_DRAW );
+	
+	//and the kid
+	
+	kidBuffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER,kidBuffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(kidVertices), gl.STATIC_DRAW );
 	
 	
     // VBO for the cube

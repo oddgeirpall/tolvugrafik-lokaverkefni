@@ -94,7 +94,7 @@ World.prototype.render = function() {
             gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
 
             gl.uniformMatrix4fv(mvLoc, false, flatten(mvWater));
-            gl.drawArrays( gl.TRIANGLES, 0, GroundVertices.length );
+            gl.drawArrays( gl.TRIANGLES, 0, numGroundVertices );
         };
     };
 };
