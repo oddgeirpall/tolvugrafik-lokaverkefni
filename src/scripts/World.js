@@ -36,8 +36,8 @@ World.prototype.render = function() {
     gl.uniform4fv( colorLoc, [0,1,0,1] ); // Set color to green
     
     for ( var i = -1; i < 2; i += 2) { // Either side of the platform
-        var mvGround = mult( g_renderMatrix,  translate( 0, i*(this.startingLoc - 100), -2 ) );
-        mvGround = mult( mvGround, scalem( 1000, 150, 2 ) );
+        var mvGround = mult( g_renderMatrix,  translate( -22, i*(this.startingLoc - 100), -2 ) );
+        mvGround = mult( mvGround, scalem( this.blockWidth*14, 150, 2 ) );
 
         gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
         gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
@@ -71,8 +71,8 @@ World.prototype.render = function() {
     gl.uniform4fv( colorLoc, [0.3,0.3,0.3,1] ); // Set color to dark grey
     
     for (var i = 0; i < this.numLanes; i++) {
-        var mvRoad = mult( g_renderMatrix,  translate( 0, this.startingLoc + (i+1)*this.blockWidth, -3 ) );
-        mvRoad = mult( mvRoad, scalem( 1000, this.blockWidth-1, 10 ) );
+        var mvRoad = mult( g_renderMatrix,  translate( -22, this.startingLoc + (i+1)*this.blockWidth, -3 ) );
+        mvRoad = mult( mvRoad, scalem( this.blockWidth*14, this.blockWidth-1, 10 ) );
 
         gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
         gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );

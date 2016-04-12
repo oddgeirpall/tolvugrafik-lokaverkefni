@@ -18,12 +18,17 @@ entity_floater.prototype.deadly = false;
 
 
 entity_floater.prototype.update = function(du){
-    if (this.x < -150 || this.x > 150){
-		this.x *= -1;
-		if(Math.random() > 0.8) this.sucker = true;
+    if (this.x > 320){
+		this.x = -370;
+		if(Math.random() > 0.8) 
+			this.sucker = true;	
 		else this.sucker = false;
-
-	}    
+	} else if (this.x < -370 ){
+		this.x = 320;
+		if(Math.random() > 0.8) 
+			this.sucker = true;
+		else this.sucker = false;
+	}	
 	
 	//sucker-Logic
 	if(this.sucker){
