@@ -24,7 +24,6 @@ World.prototype = new Entity();
 // Initial, inheritable, default values
 World.prototype.numberOfLanes = 7;
 World.prototype.numberOfLanes2 = 7; 
-			
 
 
 World.prototype.render = function() {
