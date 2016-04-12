@@ -64,7 +64,12 @@ enterLevel: function(lvl) {
     //this._character[0].reset();
     
     for (var i = 0; i < 5; i++) {
-        this.generateEnemy({
+        //this.generateEnemy({
+        //    x : util.randRange(-100, 100),
+        //    y : -190 + i*75
+        //});
+		
+		this.generateFloater({
             x : util.randRange(-100, 100),
             y : -190 + i*75
         });
@@ -86,6 +91,12 @@ giveMeZelda : function(descr) {
 generateCharacter : function(descr) {
     //this._character.push(new Zelda(descr));
 },
+
+generateFloater : function(descr) {
+    this._enemies.push(new entity_floater(descr));
+    //console.log(this._enemies);
+},
+
 
 generateEnemy : function(descr) {
     this._enemies.push(new entity_car(descr));

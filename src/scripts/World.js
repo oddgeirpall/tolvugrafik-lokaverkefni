@@ -27,7 +27,6 @@ World.prototype.numLanes = 3;
 World.prototype.numBlocks = 14;
 World.prototype.blockWidth = g_laneHeight;
 World.prototype.startingLoc;
-			
 
 World.prototype.update = function(du) {};
 
