@@ -78,7 +78,7 @@ var rVertices = [
 ];
 
 
-var g_laneHeight = 30;
+var g_laneHeight = 50;
 
 
 

@@ -71,7 +71,10 @@ enterLevel: function(lvl) {
     }
 
     this._level = lvl;
-    this.generateLevel({level: this._level});
+    this.generateLevel({
+        numLanes: 2 + this._level
+    });
+    this._world[0].generate();
     this.deferredSetup();
 },
 
@@ -90,7 +93,7 @@ generateEnemy : function(descr) {
 },
 
 generateLevel : function(descr) {
-    //this._world.push(new World(descr));
+    this._world.push(new World(descr));
     console.log('level');
 },
 

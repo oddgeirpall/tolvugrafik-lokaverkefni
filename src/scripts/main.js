@@ -116,7 +116,8 @@ main.init = function () {
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
     gl.viewport( 0, 0, g_canvas.width, g_canvas.height );
-    gl.clearColor( 0.0, 0.75, 1.0, 1.0 );
+    
+    gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
     
     gl.enable(gl.DEPTH_TEST);
 
@@ -147,7 +148,7 @@ main.init = function () {
 
     // set projection
     pLoc = gl.getUniformLocation( program, "projection" );
-    proj = perspective( 50.0, 1.0, 1.0, 500.0 );
+    proj = perspective( 50.0, 1.0, 1.0, 1000.0 );
     gl.uniformMatrix4fv(pLoc, false, flatten(proj));
     
     this._requestNextIteration();
