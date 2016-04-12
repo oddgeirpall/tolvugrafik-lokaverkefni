@@ -158,8 +158,62 @@ main.init = function () {
 
     // set projection
     pLoc = gl.getUniformLocation( program, "projection" );
-    proj = perspective( 50.0, 1.0, 1.0, 1000.0 );
+    proj = perspective( 50.0, 1.0, 1.0, 2000.0 );
     gl.uniformMatrix4fv(pLoc, false, flatten(proj));
+    
+    
+    //=======+===========
+    // EVENT LISTENERS
+    //===================
+    
+    window.addEventListener('keydown', function(evt) {
+        switch( evt.keyCode ) {
+            // Move camera (not for players)
+            case keyCode('J'):
+                cameraPos.x -= 5;
+                lookAtPoint.x -= 5;
+                break;
+            case keyCode('L'):
+                cameraPos.x += 5;
+                lookAtPoint.x += 5;
+                break;
+            case keyCode('I'):
+                cameraPos.z += 5;
+                break;
+            case keyCode('K'):
+                cameraPos.z -= 5;
+                break;
+            case keyCode('U'):
+                cameraPos.y -= 5;
+                lookAtPoint.y -= 5;
+                break;
+            case keyCode('O'):
+                cameraPos.y += 5;
+                lookAtPoint.y += 5;
+                break;
+            // Move camera (for players)
+            case keyCode('Q'):
+                lookLeft = true;
+                //console.log('Q');
+                break;
+            case keyCode('E'):
+                lookRight = true;
+                //console.log('E');
+                break;
+            case keyCode('R'):
+                if (cameraPos.z < 600) cameraPos.z += 5;
+                break;
+            case keyCode('F'):
+                if (cameraPos.z > 50) cameraPos.z -= 5;
+                break;
+        }
+    });
+    
+    window.addEventListener('keyup', function(evt) {
+        lookLeft = false;
+        lookRight = false;
+    });
+    
     
     this._requestNextIteration();
 };

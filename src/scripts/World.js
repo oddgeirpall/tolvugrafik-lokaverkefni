@@ -31,9 +31,8 @@ World.prototype.startingLoc;
 World.prototype.update = function(du) {};
 
 World.prototype.render = function() {
-    // Draw ground
     
-    // Grass
+    // Draw ground
     gl.uniform4fv( colorLoc, [0,1,0,1] ); // Set color to green
     
     for ( var i = -1; i < 2; i += 2) { // Either side of the platform

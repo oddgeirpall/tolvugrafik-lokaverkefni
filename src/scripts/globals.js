@@ -71,7 +71,21 @@ var cVertices = [
 
 var g_laneHeight = 50;
 
+// Camera location and lookat
+var cameraPos = {
+    x : 0.0,
+    y : -600.0,
+    z : 250.0
+};
 
+var lookAtPoint = {
+    x : 0.0,
+    y : 1.0,
+    z : 0.0
+}
+
+var lookLeft = false;
+var lookRight = false;
 
 // Prevent spacebar from scrolling page, esp. when console is open.
 window.onkeydown = function(e) {

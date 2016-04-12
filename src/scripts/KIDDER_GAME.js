@@ -44,6 +44,22 @@ function updateSimulation(du) {
         g_newGame = false;
         initLevel();
     }
+    
+    
+    if (lookLeft === true) {
+        if (lookAtPoint.x > -150) lookAtPoint.x -= 5*du;
+    } else if (lookAtPoint.x < 0) {
+        if (lookAtPoint.x + 5*du > 0) lookAtPoint.x = 0;
+            else lookAtPoint.x += 5*du;
+    }
+    if (lookRight === true) {
+        if (lookAtPoint.x < 150) lookAtPoint.x += 5*du;
+    } else if (lookAtPoint.x > 0) {
+        if (lookAtPoint.x - 5*du < 0) lookAtPoint.x = 0;
+            else lookAtPoint.x -= 5*du;
+    }
+    
+    //console.log(lookAtPoint.x);
     entityManager.update(du); 
 
 }
@@ -87,8 +103,8 @@ function renderSimulation() {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     
     g_renderMatrix = mat4();
-    g_renderMatrix = lookAt( vec3(0.0, 0.0, 700.0), vec3(0.0, 1.0, 0.0), vec3(0.0, 0.0, 1.0) );
-    
+    g_renderMatrix = lookAt( vec3(cameraPos.x, cameraPos.y, cameraPos.z), vec3(lookAtPoint.x, lookAtPoint.y, lookAtPoint.z), vec3(0.0, 0.0, 1.0) );
+
     entityManager.render();
 };
 

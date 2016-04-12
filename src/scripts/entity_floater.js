@@ -3,6 +3,7 @@ function entity_floater(descr) {
         this[property] = descr[property];
     }
 	if(Math.random() > 0.8) this.sucker = true;
+    else this.sucker = false;
 }
 
 entity_floater.prototype = new Entity();
@@ -10,7 +11,7 @@ entity_floater.prototype = new Entity();
 entity_floater.prototype.x = 0;
 entity_floater.prototype.y = 0;
 entity_floater.prototype.z = 5;
-entity_floater.prototype.sucker = false;
+entity_floater.prototype.sucker;
 entity_floater.prototype.length = 2;
 entity_floater.prototype.counter = 0;
 entity_floater.prototype.deadly = false;
@@ -56,19 +57,4 @@ entity_floater.prototype.render = function draw() {
 
     gl.uniformMatrix4fv(mvLoc, false, flatten(mvW));
     gl.drawArrays( gl.TRIANGLES, 0, numCubeVertices );
-    
-    /*
-    // Then draw the roof
-    gl.uniform4fv( colorLoc, vec4(1.0, 1.0, 0.0, 1.0) ); // Set color to red
-    
-    var mvR = mult( g_renderMatrix,  translate( 0, 0, 3*10/2 ) );
-    mvR = mult( mvR, scalem( 10, 10, 10 ) );
-    mvR = mult( mvR, rotateX(-90));
-    
-    gl.bindBuffer( gl.ARRAY_BUFFER, roofBuffer );
-    gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
-    
-    gl.uniformMatrix4fv(mvLoc, false, flatten(mvR) );
-    //gl.drawArrays( gl.TRIANGLE_STRIP, 0, numRoofVertices );
-    */
 };
