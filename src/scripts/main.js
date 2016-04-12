@@ -120,6 +120,13 @@ main.init = function () {
     gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
     
     gl.enable(gl.DEPTH_TEST);
+	
+	    // get models
+    var PR = PlyReader();
+    var plyData = PR.read("src/images/ground.ply");
+
+    GroundVertices = plyData.points;
+    GroundNormals = plyData.normals;
 
     //
     //  Load shaders and initialize attribute buffers
@@ -127,17 +134,20 @@ main.init = function () {
     var program = initShaders( gl, "vertex-shader", "fragment-shader" );
     gl.useProgram( program );
 
+	
+		 // VBO for groundStuff
+    var groundBuffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER, groundBuffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(GroundVertices), gl.STATIC_DRAW );
+	
+	
     // VBO for the cube
     cubeBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
     gl.bufferData( gl.ARRAY_BUFFER, flatten(cVertices), gl.STATIC_DRAW );
-    
-    // VBO for the roof
-    roofBuffer = gl.createBuffer();
-    gl.bindBuffer( gl.ARRAY_BUFFER, roofBuffer );
-    gl.bufferData( gl.ARRAY_BUFFER, flatten(rVertices), gl.STATIC_DRAW );
 
-
+	
+	
     vPosition = gl.getAttribLocation( program, "vPosition" );
     gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
     gl.enableVertexAttribArray( vPosition );

@@ -41,6 +41,9 @@ var vPosition;
 
 var gl;
 
+var GroundVertices = [];
+var GroundNormals = [];
+
 // Matrices
 var g_renderMatrix;
 
@@ -65,18 +68,6 @@ var cVertices = [
     vec3( -0.5,  0.5, -0.5 ), vec3( -0.5, -0.5, -0.5 ), vec3( -0.5, -0.5,  0.5 ),
     vec3( -0.5, -0.5,  0.5 ), vec3( -0.5,  0.5,  0.5 ), vec3( -0.5,  0.5, -0.5 )
 ];
-
-var rVertices = [
-    // Front triangle:
-    vec3( -0.5, -0.5,  0.5 ), vec3( 0.0,  0.0,  0.5 ), vec3( 0.5, -0.5, 0.5 ),
-    // Right rectangle:
-    vec3(  0.0,  0.0, -0.5 ), vec3( 0.5, -0.5, -0.5 ),
-    // Back triangle:
-    vec3( -0.5, -0.5, -0.5 ), vec3( 0.0,  0.0, -0.5 ),
-    // Left rectangle:
-    vec3( -0.5, -0.5,  0.5 ), vec3( 0.0,  0.0,  0.5 )
-];
-
 
 var g_laneHeight = 50;
 
