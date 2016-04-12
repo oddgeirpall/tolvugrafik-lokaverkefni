@@ -38,6 +38,7 @@ var cubeBuffer;
 var trackBuffer;
 var roofBuffer;
 var vPosition;
+var groundBuffer;
 
 var gl;
 

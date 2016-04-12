@@ -36,7 +36,7 @@ World.prototype.render = function() {
     gl.uniform4fv( colorLoc, [0,1,0,1] ); // Set color to green
     
     for ( var i = -1; i < 2; i += 2) { // Either side of the platform
-        var mvGround = mult( g_renderMatrix,  translate( 0, i*(this.startingLoc - 100), -1.5 ) );
+        var mvGround = mult( g_renderMatrix,  translate( 0, i*(this.startingLoc - 100), -2 ) );
         mvGround = mult( mvGround, scalem( 1000, 150, 2 ) );
 
         gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
@@ -56,8 +56,8 @@ World.prototype.render = function() {
         for (var j = 0; j < this.numBlocks; j++) {
             var xDisplacement = -7*this.blockWidth + j*this.blockWidth;
             
-            var mvSidewalks = mult( g_renderMatrix,  translate( xDisplacement, yDisplacement, -1 ) );
-            mvSidewalks = mult( mvSidewalks, scalem( this.blockWidth-1, this.blockWidth-1, 2 ) );
+            var mvSidewalks = mult( g_renderMatrix,  translate( xDisplacement, yDisplacement, 1 ) );
+            mvSidewalks = mult( mvSidewalks, scalem( this.blockWidth-1, this.blockWidth-1, 10 ) );
 
             gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
             gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
@@ -71,8 +71,8 @@ World.prototype.render = function() {
     gl.uniform4fv( colorLoc, [0.3,0.3,0.3,1] ); // Set color to dark grey
     
     for (var i = 0; i < this.numLanes; i++) {
-        var mvRoad = mult( g_renderMatrix,  translate( 0, this.startingLoc + (i+1)*this.blockWidth, -1 ) );
-        mvRoad = mult( mvRoad, scalem( 1000, this.blockWidth-1, 2 ) );
+        var mvRoad = mult( g_renderMatrix,  translate( 0, this.startingLoc + (i+1)*this.blockWidth, -3 ) );
+        mvRoad = mult( mvRoad, scalem( 1000, this.blockWidth-1, 10 ) );
 
         gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
         gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
@@ -87,14 +87,14 @@ World.prototype.render = function() {
     for (var i = 0; i < this.numSidewalks; i++) {
         for (var j = 0; j < this.numBlocks; j++) {
             var mvWater = mult( g_renderMatrix,  translate( -7*this.blockWidth + j*this.blockWidth, 
-                                                                this.startingLoc + (this.numLanes+1)*this.blockWidth + (i+1)*this.blockWidth, 0 ) );
-            mvWater = mult( mvWater, scalem( this.blockWidth, this.blockWidth, this.blockWidth ) );
+                                this.startingLoc + (this.numLanes+1)*this.blockWidth + (i+1)*this.blockWidth, -10 ) );
+            mvWater = mult( mvWater, scalem( this.blockWidth/1.7, this.blockWidth/1.7, 10) );
 
-            gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
+            gl.bindBuffer( gl.ARRAY_BUFFER, groundBuffer );
             gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
 
             gl.uniformMatrix4fv(mvLoc, false, flatten(mvWater));
-            gl.drawArrays( gl.TRIANGLES, 0, numCubeVertices );
+            gl.drawArrays( gl.TRIANGLES, 0, GroundVertices.length );
         };
     };
 };

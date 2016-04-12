@@ -136,7 +136,7 @@ main.init = function () {
 
 	
 		 // VBO for groundStuff
-    var groundBuffer = gl.createBuffer();
+    groundBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, groundBuffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(GroundVertices), gl.STATIC_DRAW );
 	
