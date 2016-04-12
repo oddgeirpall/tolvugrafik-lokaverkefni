@@ -25,7 +25,7 @@ entity_car.prototype.render = function draw() {
     //console.log('entity_car rendering');
     
     //Draw the walls first
-    gl.uniform4fv( colorLoc, YELLOW ); // Set color to yellow
+    gl.uniform4fv( colorLoc, [1,1,0,1] ); // Set color to yellow
    
     var mvW = mult( g_renderMatrix,  translate( this.x, this.y,  10/2 ) );
     mvW = mult( mvW, scalem( 10, 10, 10 ) );
