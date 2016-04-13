@@ -6,6 +6,7 @@ function entity_car(descr) {
 
 entity_car.prototype = new Entity();
 
+entity_car.prototype.speed = 1;
 entity_car.prototype.lane = 0;
 entity_car.prototype.x = 0;
 entity_car.prototype.y = 0;
@@ -21,7 +22,7 @@ entity_car.prototype.update = function(du){
 	}
     
     if (this.goesLeft) this.x -= du;
-    else this.x += du;	
+    else this.x += du*this.speed;	
 };
 
 entity_car.prototype.interactWithKid = function(kid, du){

@@ -81,12 +81,14 @@ enterLevel: function(lvl) {
     for (var i = 0; i < numLanes; i++) { // Veggies
         var yDisplacement = this._world[0].startingLoc + g_laneHeight*(i+1);
         for (var j = 0; j < numEnemies; j++) {
-            var xDisplacement = util.randRange(-370,320);
+			var temp = (690/numEnemies); 
+            var xDisplacement = util.randRange(-370 + j*temp,-300 +(j+1)*temp);
             this.generateEnemy({
                 x : xDisplacement,
                 y : yDisplacement,
                 goesLeft : i%2 === 0,
-				lane : i + 1
+				lane : i + 1,
+				speed : 0.9 + (((i+i)%3) * 0.2) 
             });
         }
     }
@@ -95,12 +97,14 @@ enterLevel: function(lvl) {
     for (var i = 0; i < numLanes; i++) { // Floaters
         var yDisplacement = this._world[0].startingLoc + g_laneHeight*(i+2+numLanes);
         for (var j = 0; j < numEnemies; j++) {
-            var xDisplacement = util.randRange(-370,320);
+			var temp = (690/numEnemies); 
+            var xDisplacement = util.randRange(-370 + j*temp,-355 +(j+1)*temp);
             this.generateFloater({
                 x : xDisplacement,
                 y : yDisplacement,
                 goesLeft : i%2 === 0,
-				lane: i + 2 + numLanes
+				lane: i + 2 + numLanes,
+				speed : 0.9 + (((i+i)%3) * 0.2)
             });
         }
     }
