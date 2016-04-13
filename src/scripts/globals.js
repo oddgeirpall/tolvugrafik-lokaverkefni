@@ -37,26 +37,34 @@ var numKidVertices = 48;
 
 var colorLoc;
 var mvLoc;
+var normalLoc;
 var pLoc;
 var proj;
 
-var cubeBuffer;
-var trackBuffer;
-var roofBuffer;
 var vPosition;
+var nPosition;
 var kPosition;
 var c1Position;
 var c2Position;
 var c3Position;
 var c4Position;
 var wPosition;
-var groundBuffer;
 
-var car3Buffer;
-var car2Buffer;
+var cubeBuffer;
+var groundBuffer
 var car1Buffer;
+var car2Buffer;
+var car3Buffer;
 var car4Buffer;
 var kidBuffer;
+
+var cubeNormalBuffer;
+var groundNormalBuffer;
+var car1NormalBuffer;
+var car2NormalBuffer;
+var car3NormalBuffer;
+var car4NormalBuffer;
+var kidNormalBuffer;
 
 var gl;
 
@@ -72,6 +80,20 @@ var car4Vertices = [];
 var car4Normals = [];
 var kidVertices = [];
 var kidNormals = [];
+
+// Lighting
+
+var lightPosition = vec4( 1000.0, 0.0, 1000.0, 0.0);
+var lightAmbient = vec4(1.0, 1.0, 1.0, 1.0 );
+var lightDiffuse = vec4( 1.0, 1.0, 1.0, 1.0 );
+var lightSpecular = vec4( 1.0, 1.0, 1.0, 1.0 );
+
+var materialAmbient = vec4( 0.5, 0.5, 0.5, 1.0 );
+var materialDiffuse = vec4( 1.0, 1.0, 1.0, 1.0 );
+var materialSpecular = vec4( 1.0, 1.0, 1.0, 1.0 );
+var materialShininess = 1000.0;
+
+var ambientProduct, diffuseProduct, specularProduct;
 
 // Matrices
 var g_renderMatrix;
@@ -96,6 +118,32 @@ var cVertices = [
     // left side:
     vec3( -0.5,  0.5, -0.5 ), vec3( -0.5, -0.5, -0.5 ), vec3( -0.5, -0.5,  0.5 ),
     vec3( -0.5, -0.5,  0.5 ), vec3( -0.5,  0.5,  0.5 ), vec3( -0.5,  0.5, -0.5 )
+];
+
+var cNormals = [ // Cube normals
+    // Front side
+    vec3( 0.0, 0.0, 1.0), vec3( 0.0, 0.0, 1.0), vec3( 0.0, 0.0, 1.0),
+    vec3( 0.0, 0.0, 1.0), vec3( 0.0, 0.0, 1.0), vec3( 0.0, 0.0, 1.0),
+    
+    // Right side
+    vec3( 1.0, 0.0, 0.0), vec3( 1.0, 0.0, 0.0), vec3( 1.0, 0.0, 0.0),
+    vec3( 1.0, 0.0, 0.0), vec3( 1.0, 0.0, 0.0), vec3( 1.0, 0.0, 0.0),
+    
+    // Bottom side
+    vec3( 0.0, -1.0, 0.0), vec3( 0.0, -1.0, 0.0), vec3( 0.0, -1.0, 0.0),
+    vec3( 0.0, -1.0, 0.0), vec3( 0.0, -1.0, 0.0), vec3( 0.0, -1.0, 0.0),
+    
+    // Top side
+    vec3( 0.0, 1.0, 0.0), vec3( 0.0, 1.0, 0.0), vec3( 0.0, 1.0, 0.0),
+    vec3( 0.0, 1.0, 0.0), vec3( 0.0, 1.0, 0.0), vec3( 0.0, 1.0, 0.0),
+    
+    // Back side
+    vec3( 0.0, 0.0, -1.0), vec3( 0.0, 0.0, -1.0), vec3( 0.0, 0.0, -1.0),
+    vec3( 0.0, 0.0, -1.0), vec3( 0.0, 0.0, -1.0), vec3( 0.0, 0.0, -1.0),
+    
+    // Left side
+    vec3( -1.0, 0.0, 0.0), vec3( -1.0, 0.0, 0.0), vec3( -1.0, 0.0, 0.0),
+    vec3( -1.0, 0.0, 0.0), vec3( -1.0, 0.0, 0.0), vec3( -1.0, 0.0, 0.0)
 ];
 
 var g_laneHeight = 50;
@@ -141,3 +189,4 @@ window.onkeydown = function(e) {
 var backgroundMusic;
 var godView = false;
 var zooming = false;
+var program;

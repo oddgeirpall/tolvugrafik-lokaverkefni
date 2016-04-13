@@ -154,54 +154,97 @@ main.init = function () {
     gl.bindBuffer( gl.ARRAY_BUFFER, groundBuffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(GroundVertices), gl.STATIC_DRAW );
 	
-	
+	groundNormalBuffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER, groundNormalBuffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(GroundNormals), gl.STATIC_DRAW);
 	
 		 // VBO for All the Cars
     car1Buffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER,car1Buffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(car1Vertices), gl.STATIC_DRAW );
+    
+    car1NormalBuffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER, car1NormalBuffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(car1Normals), gl.STATIC_DRAW);
 	
 	car2Buffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER,car2Buffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(car2Vertices), gl.STATIC_DRAW );
+    
+    car2NormalBuffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER, car2NormalBuffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(car2Normals), gl.STATIC_DRAW);
 	
 	car3Buffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER,car3Buffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(car3Vertices), gl.STATIC_DRAW );
+    
+    car3NormalBuffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER, car3NormalBuffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(car3Normals), gl.STATIC_DRAW);
 	
 	car4Buffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER,car4Buffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(car4Vertices), gl.STATIC_DRAW );
+    
+    car4NormalBuffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER, car4NormalBuffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(car4Normals), gl.STATIC_DRAW);
 	
 	//and the kid
 	
 	kidBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER,kidBuffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(kidVertices), gl.STATIC_DRAW );
+    
+    kidNormalBuffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER, kidNormalBuffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(kidNormals), gl.STATIC_DRAW);
 
 
     // VBO for the cube
     cubeBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
     gl.bufferData( gl.ARRAY_BUFFER, flatten(cVertices), gl.STATIC_DRAW );
+    
+    cubeNormalBuffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER, cubeNormalBuffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(cNormals), gl.STATIC_DRAW);
 
 	
 	
     vPosition = gl.getAttribLocation( program, "vPosition" );
     gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
     gl.enableVertexAttribArray( vPosition );
+    
+    nPosition = gl.getAttribLocation( program, "nPosition" );
+    gl.vertexAttribPointer( nPosition, 3, gl.FLOAT, false, 0, 0 );
+    gl.enableVertexAttribArray( nPosition );
 
     colorLoc = gl.getUniformLocation( program, "fColor" );
     
     mvLoc = gl.getUniformLocation( program, "modelview" );
+    normalLoc = gl.getUniformLocation( program, "normal" )
 
     // set projection
     pLoc = gl.getUniformLocation( program, "projection" );
     proj = perspective( 50.0, 1.0, 1.0, 2000.0 );
     gl.uniformMatrix4fv(pLoc, false, flatten(proj));
     
+    // Lighting
     
-    //=======+===========
+    ambientProduct = mult(lightAmbient, materialAmbient);
+    diffuseProduct = mult(lightDiffuse, materialDiffuse);
+    specularProduct = mult(lightSpecular, materialSpecular);
+    
+    gl.uniform4fv( gl.getUniformLocation(program, "ambientProduct"), flatten(ambientProduct) );
+    gl.uniform4fv( gl.getUniformLocation(program, "diffuseProduct"), flatten(diffuseProduct) );
+    gl.uniform4fv( gl.getUniformLocation(program, "specularProduct"), flatten(specularProduct) );   
+    gl.uniform4fv( gl.getUniformLocation(program, "lightPosition"), flatten(lightPosition) );
+    gl.uniform1f( gl.getUniformLocation(program, "shininessBP"), materialShininess );
+    
+    
+    //===================
     // EVENT LISTENERS
     //===================
     

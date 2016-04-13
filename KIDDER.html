@@ -34,28 +34,56 @@
 <script id="vertex-shader" type="x-shader/x-vertex">
 
 attribute  vec4 vPosition;
-attribute  vec4 vColor;
-varying vec4 fColor;
-
-uniform mat4 projection;
+attribute  vec3 nPosition;
+varying vec3 N, L, E;
 uniform mat4 modelview;
+uniform mat4 projection;
+uniform mat3 normal;
+uniform vec4 lightPosition;
 
 void main() 
-{
-    fColor = vColor;
-    gl_Position = projection * modelview * vPosition;
-} 
+{    
+
+    vec3 pos = (modelview * vPosition).xyz;
+
+    N = normalize( modelview*vec4(normalize(nPosition), 0.0) ).xyz;
+    E = normalize( -pos );
+    L = normalize( lightPosition.xyz - pos );
+            
+    gl_Position = projection*modelview*vPosition;
+
+}
 </script>
 
 <script id="fragment-shader" type="x-shader/x-fragment">
 
 precision mediump float;
-   
-uniform vec4 fColor;
 
-void
-main()
+uniform vec4 ambientProduct;
+uniform vec4 diffuseProduct;
+uniform vec4 specularProduct;
+uniform float shininessBP;
+varying vec3 N, L, E;
+
+varying vec4 fColor;
+
+void main()
 {
+    vec3 H = normalize( L + E );
+    vec4 ambient = ambientProduct;
+
+    float Kd = max( dot(L, N), 0.0 );
+    vec4  diffuse = Kd*diffuseProduct;
+    
+    float Ks = pow( max(dot(N, H), 0.0), shininessBP );
+
+    vec4  specular = Ks * specularProduct;
+
+    if( dot(L, N) < 0.0 ) specular = vec4(0.0, 0.0, 0.0, 1.0);
+
+    vec4 fColor = ambient + diffuse + specular;
+    fColor.a = 1.0;
+
     gl_FragColor = fColor;
 }
 </script>
