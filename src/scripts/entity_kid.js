@@ -6,11 +6,11 @@ function entity_kid(descr) {
 
 entity_kid.prototype = new Entity();
 
-entity_kid.prototype.halfHeight = g_laneHeight/2;
+entity_kid.prototype.halfHeight = g_laneHeight/6;
 
 entity_kid.prototype.x = 0;
 entity_kid.prototype.y = 0;
-entity_kid.prototype.z = g_laneHeight/2;
+entity_kid.prototype.z = g_laneHeight/6;
 entity_kid.prototype.wobble = 0.1;
 
 entity_kid.prototype.isJumping = false;
@@ -112,7 +112,7 @@ entity_kid.prototype.render = function draw() {
     gl.uniform4fv( colorLoc, [0,1,1,1] ); // Set color to aqua
    
     var mvKid = mult( g_renderMatrix,  translate( this.x, this.y, this.z ) );
-    mvKid = mult( mvKid, scalem( g_laneHeight-5, g_laneHeight-5, g_laneHeight-5 ) );
+    mvKid = mult( mvKid, scalem( 2*this.halfHeight, 2*this.halfHeight, 2*this.halfHeight ) );
 
     gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
     gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );

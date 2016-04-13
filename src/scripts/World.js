@@ -56,7 +56,7 @@ World.prototype.render = function() {
         for (var j = 0; j < this.numBlocks; j++) {
             var xDisplacement = -7*this.blockWidth + j*this.blockWidth;
             
-            var mvSidewalks = mult( g_renderMatrix,  translate( xDisplacement, yDisplacement, 1 ) );
+            var mvSidewalks = mult( g_renderMatrix,  translate( xDisplacement, yDisplacement, -5 ) );
             mvSidewalks = mult( mvSidewalks, scalem( this.blockWidth-1, this.blockWidth-1, 10 ) );
 
             gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
@@ -71,7 +71,7 @@ World.prototype.render = function() {
     gl.uniform4fv( colorLoc, [0.3,0.3,0.3,1] ); // Set color to dark grey
     
     for (var i = 0; i < this.numLanes; i++) {
-        var mvRoad = mult( g_renderMatrix,  translate( -22, this.startingLoc + (i+1)*this.blockWidth, -3 ) );
+        var mvRoad = mult( g_renderMatrix,  translate( -22, this.startingLoc + (i+1)*this.blockWidth, -5 ) );
         mvRoad = mult( mvRoad, scalem( this.blockWidth*14, this.blockWidth-1, 10 ) );
 
         gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );

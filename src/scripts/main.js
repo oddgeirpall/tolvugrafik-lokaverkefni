@@ -235,7 +235,7 @@ main.init = function () {
                 break;
             case keyCode('G'):
                 cameraPos = {
-                    x : 0,
+                    x : entityManager._character[0].x,
                     y : -400,
                     z : 830
                 };

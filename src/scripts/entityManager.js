@@ -58,19 +58,6 @@ enterLevel: function(lvl) {
     this._world = [];
     this._grid = [];
     
-    /*
-    for (var i = 0; i < 5; i++) {
-        //this.generateEnemy({
-        //    x : util.randRange(-100, 100),
-        //    y : -190 + i*75
-        //});
-		
-		this.generateFloater({
-            x : util.randRange(-100, 100),
-            y : -190 + i*75
-        });
-    }
-    */
     
     // Create level
     this._level = lvl;
