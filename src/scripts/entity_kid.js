@@ -195,8 +195,35 @@ entity_kid.prototype.render = function draw() {
 
     gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
     gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
+    
+    gl.bindBuffer( gl.ARRAY_BUFFER, cubeNormalBuffer );
+    gl.vertexAttribPointer( nPosition, 3, gl.FLOAT, false, 0, 0);
+    
+    cubeNormalMatrix = [
+        vec3(mvKid[0][0], mvKid[0][1], mvKid[0][2],
+             mvKid[0][0], mvKid[1][1], mvKid[1][2],
+             mvKid[0][0], mvKid[2][1], mvKid[2][2])
+    ];
+    
+    var lightAmbient = vec4(1.0, 1.0, 1.0, 1.0 );
+    var lightDiffuse = vec4( 1.0, 1.0, 1.0, 1.0 );
+    var lightSpecular = vec4( 1.0, 1.0, 1.0, 1.0 );
+
+    var materialAmbient = vec4( 0, 0.5, 0.5, 1.0 );
+    var materialDiffuse = vec4( 0, 1.0, 1.0, 1.0 );
+    var materialSpecular = vec4( 1.0, 1.0, 1.0, 1.0 );
+    
+    ambientProduct = mult(lightAmbient, materialAmbient);
+    diffuseProduct = mult(lightDiffuse, materialDiffuse);
+    specularProduct = mult(lightSpecular, materialSpecular);
+    
+    gl.uniform4fv( gl.getUniformLocation(program, "ambientProduct"), flatten(ambientProduct) );
+    gl.uniform4fv( gl.getUniformLocation(program, "diffuseProduct"), flatten(diffuseProduct) );
+    gl.uniform4fv( gl.getUniformLocation(program, "specularProduct"), flatten(specularProduct) );
 
     gl.uniformMatrix4fv(mvLoc, false, flatten(mvKid));
+    gl.uniformMatrix3fv(normalLoc, false, flatten(cubeNormalMatrix));
+    
     gl.drawArrays( gl.TRIANGLES, 0, numCubeVertices);
     
 	*/

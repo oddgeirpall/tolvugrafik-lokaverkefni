@@ -49,7 +49,7 @@ function updateSimulation(du) {
     if (!g_gameStarted) {
         if (eatKey(KEY_SPACE)) zooming = true;
         if (zooming) {
-            cameraPos.y -= 10;
+            cameraPos.y -= 10;          
         }
         if (cameraPos.y === -360) {
             g_gameStarted = true;
