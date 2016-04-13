@@ -120,3 +120,7 @@ var lookRight = false;
 window.onkeydown = function(e) {
 	if(e.keyCode == " ".charCodeAt(0) || e.keyCode == 38 || e.keyCode == 40) e.preventDefault();
 }
+
+// Other
+
+var backgroundMusic;

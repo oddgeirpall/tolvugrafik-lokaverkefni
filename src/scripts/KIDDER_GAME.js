@@ -48,13 +48,13 @@ function updateSimulation(du) {
     var charX = entityManager._character[0].x;
     
     if (lookLeft === true) {
-        if (lookAtPoint.x > -300) lookAtPoint.x -= 5*du;
+        if (lookAtPoint.x > -300) lookAtPoint.x -= 10*du;
     } else if (lookAtPoint.x < charX) {
         if (lookAtPoint.x + 10*du > charX) lookAtPoint.x = charX;
             else lookAtPoint.x += 10*du;
     }
     if (lookRight === true) {
-        if (lookAtPoint.x < 300) lookAtPoint.x += 5*du;
+        if (lookAtPoint.x < 300) lookAtPoint.x += 10*du;
     } else if (lookAtPoint.x > charX) {
         if (lookAtPoint.x - 10*du < charX) lookAtPoint.x = charX;
             else lookAtPoint.x -= 10*du;
@@ -151,6 +151,7 @@ function makeZeldaAnimation(scale) {
 function imagePreloadDone() {
     var requiredAudio = {
 		//patRedB: "res/sounds/Patt_redBull.ogg",
+        MainTheme: 'src/audios/LOTRtheme.ogg'
     }
     audioPreload(requiredAudio, g_audio, preloadDone);
 };
@@ -175,12 +176,10 @@ function initLevel() {
     console.log('initLevel');
     entityManager.enterLevel(2);
     
-    //g_lvlLength = entityManager._world[0].blocks[13].length*(g_canvas.height/14) - g_canvas.width;
-    
     //backgroundMusic.pause();
 	
-	//g_audio.theme1.volume=0.1;
-    //util.playLoop(g_audio.theme1);
+    backgroundMusic = g_audio.MainTheme;
+    util.playLoop(g_audio.MainTheme);
 };
 
 // Kick it off
