@@ -161,15 +161,14 @@ main.init = function () {
     //
     var program = initShaders( gl, "vertex-shader", "fragment-shader" );
     gl.useProgram( program );
-
-	vPosition = gl.getAttribLocation( program, "vPosition" );
-    gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
-    gl.enableVertexAttribArray( vPosition );
 	
 	treeBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, treeBuffer );
     gl.bufferData( gl.ARRAY_BUFFER, flatten(spjaldVertices), gl.STATIC_DRAW );
     
+    vPosition = gl.getAttribLocation( program, "vPosition" );
+    gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
+    gl.enableVertexAttribArray( vPosition );
 	
 		 // VBO for groundStuff
     groundBuffer = gl.createBuffer();
@@ -229,14 +228,26 @@ main.init = function () {
 	kid1Buffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER,kid1Buffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(kid1Vertices), gl.STATIC_DRAW );
+    
+    kid1BufferNormal = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER,kid1BufferNormal);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(kid1Normals), gl.STATIC_DRAW );
 
 	kid2Buffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER,kid2Buffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(kid2Vertices), gl.STATIC_DRAW );
+    
+    kid2BufferNormal = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER,kid2BufferNormal);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(kid2Normals), gl.STATIC_DRAW );
 
 	kid3Buffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER,kid3Buffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(kid3Vertices), gl.STATIC_DRAW );
+    
+    kid3BufferNormal = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER,kid3BufferNormal);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(kid3Normals), gl.STATIC_DRAW );
 
 
     // VBO for the cube
@@ -247,11 +258,12 @@ main.init = function () {
     cubeNormalBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, cubeNormalBuffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(cNormals), gl.STATIC_DRAW);
-
+    
+    /*
     vTexCoord = gl.getAttribLocation( program, "vTexCoord" );
     gl.vertexAttribPointer( vTexCoord, 2, gl.FLOAT, false, 0, 0 );
     gl.enableVertexAttribArray( vTexCoord );
-	
+	*/
 	
     vPosition = gl.getAttribLocation( program, "vPosition" );
     gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
@@ -283,12 +295,9 @@ main.init = function () {
     gl.uniform4fv( gl.getUniformLocation(program, "lightPosition"), flatten(lightPosition) );
     gl.uniform1f( gl.getUniformLocation(program, "shininessBP"), materialShininess );
     
-    
-    //===================
-    // Ná í mynd úr html-skrá:
-    //
-     var image = document.getElementById("texImage");
 
+    image = document.getElementById("texImage");
+    
     var xIm = image.ImageData;
     util.configureTexture( image , program);
 	

@@ -81,6 +81,9 @@ var car4Buffer;
 var kid1Buffer;
 var kid2Buffer;
 var kid3Buffer;
+var kid1BufferNormal;
+var kid2BufferNormal;
+var kid3BufferNormal;
 
 var cubeNormalBuffer;
 var groundNormalBuffer;
