@@ -28,13 +28,20 @@ var SECS_TO_NOMINALS = 1000 / NOMINAL_UPDATE_INTERVAL;
 // Buffers
 var numCubeVertices = 36;
 var numRoofVertices = 9;
-var numGroundVertices = 240;
+var numGroundVertices = 420;
 var numCar1Vertices = 90;
 var numCar2Vertices = 138;
 var numCar3Vertices = 321;
 var numCar4Vertices = 321;
-var numKidVertices = 876;
+
+var numKid1Vertices = 1104;
+var numKid2Vertices = 150;
+var numKid3Vertices = 270;
+
 var numTreVertices  = 6;
+
+var numFloater1Vertices = 588;
+var numFloater2Vertices = 90;
 
 var texture;
 var colorLoc;
@@ -42,6 +49,7 @@ var mvLoc;
 var pLoc;
 var proj;
 
+var treeBuffer;
 var cubeBuffer;
 var trackBuffer;
 var roofBuffer;
@@ -53,7 +61,9 @@ var c3Position;
 var c4Position;
 var wPosition;
 var groundBuffer;
-var treeBuffer;
+
+var floater1Buffer;
+var floater2Buffer;
 
 var vTexCoord;
 
@@ -63,7 +73,9 @@ var car3Buffer;
 var car2Buffer;
 var car1Buffer;
 var car4Buffer;
-var kidBuffer;
+var kid1Buffer;
+var kid2Buffer;
+var kid3Buffer;
 
 var gl;
 
@@ -77,8 +89,18 @@ var car3Vertices = [];
 var car3Normals = [];
 var car4Vertices = [];
 var car4Normals = [];
-var kidVertices = [];
-var kidNormals = [];
+
+var kid1Vertices = [];
+var kid1Normals = [];
+var kid2Vertices = [];
+var kid2Normals = [];
+var kid3Vertices = [];
+var kid3Normals = [];
+
+var floater1Vertices = [];
+var floater1Normals = [];
+var floater2Vertices = [];
+var floater2Normals = [];
 
 // Matrices
 var g_renderMatrix;

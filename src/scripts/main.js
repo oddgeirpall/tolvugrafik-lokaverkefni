@@ -138,10 +138,21 @@ main.init = function () {
 	plyData = PR.read("src/images/Tomato.ply");
     car4Vertices = plyData.points;
     car4Normals = plyData.normals;
-	plyData = PR.read("src/images/kid.ply");
-    kidVertices = plyData.points;
-    kidNormals = plyData.normals;
-	
+	plyData = PR.read("src/images/kidbody.ply");
+    kid1Vertices = plyData.points;
+    kid1Normals = plyData.normals;
+	plyData = PR.read("src/images/kidshirt.ply");
+    kid2Vertices = plyData.points;
+    kid2Normals = plyData.normals;
+	plyData = PR.read("src/images/donut.ply");
+    kid3Vertices = plyData.points;
+    kid3Normals = plyData.normals;
+	plyData = PR.read("src/images/chocB.ply");
+    floater1Vertices = plyData.points;
+    floater1Normals = plyData.normals;
+	plyData = PR.read("src/images/candy.ply");
+    floater2Vertices = plyData.points;
+    floater2Normals = plyData.normals;
 	
 	
 
@@ -184,11 +195,29 @@ main.init = function () {
     gl.bindBuffer( gl.ARRAY_BUFFER,car4Buffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(car4Vertices), gl.STATIC_DRAW );
 	
+	//floaters
+	
+	floater1Buffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER,floater1Buffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(floater1Vertices), gl.STATIC_DRAW );
+	
+	floater2Buffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER,floater2Buffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(floater2Vertices), gl.STATIC_DRAW );
+	
 	//and the kid
 	
-	kidBuffer = gl.createBuffer();
-    gl.bindBuffer( gl.ARRAY_BUFFER,kidBuffer);
-    gl.bufferData( gl.ARRAY_BUFFER, flatten(kidVertices), gl.STATIC_DRAW );
+	kid1Buffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER,kid1Buffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(kid1Vertices), gl.STATIC_DRAW );
+
+	kid2Buffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER,kid2Buffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(kid2Vertices), gl.STATIC_DRAW );
+
+	kid3Buffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER,kid3Buffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(kid3Vertices), gl.STATIC_DRAW );
 
 
     // VBO for the cube

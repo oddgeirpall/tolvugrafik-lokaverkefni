@@ -31,16 +31,38 @@ entity_car.prototype.interactWithKid = function(kid, du){
 
 entity_car.prototype.render = function draw() {
     //console.log('entity_car rendering');
-    
-    gl.uniform4fv( colorLoc, [1,1,0,1] ); // Set color to yellow
+    if(this.lane % 3 === 1){
+		gl.uniform4fv( colorLoc, [0.8,0.4,0,1] ); // Set color to orange
    
-    var mvW = mult( g_renderMatrix,  translate( this.x, this.y,  10/2 ) );
-    mvW = mult( mvW, scalem( 10, 10, 10 ) );
+		var mvW = mult( g_renderMatrix,  translate( this.x, this.y,  14 ) );
+		mvW = mult( mvW, scalem( 4, 4, 3 ) );
 
-    gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
-    gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
+		gl.bindBuffer( gl.ARRAY_BUFFER, car1Buffer );
+		gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
 
-    gl.uniformMatrix4fv(mvLoc, false, flatten(mvW));
-    gl.drawArrays( gl.TRIANGLES, 0, numCubeVertices );
-    
+		gl.uniformMatrix4fv(mvLoc, false, flatten(mvW));
+		gl.drawArrays( gl.TRIANGLES, 0, numCar1Vertices );
+	} else if(this.lane % 3 === 2){
+		gl.uniform4fv( colorLoc, [0.1,0.3,0.1,4] ); // Set color to green
+   
+		var mvW = mult( g_renderMatrix,  translate( this.x, this.y,  14 ) );
+		mvW = mult( mvW, scalem( 6, 6, 7 ) );
+
+		gl.bindBuffer( gl.ARRAY_BUFFER, car2Buffer );
+		gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
+
+		gl.uniformMatrix4fv(mvLoc, false, flatten(mvW));
+		gl.drawArrays( gl.TRIANGLES, 0, numCar2Vertices );
+	} else {
+		gl.uniform4fv( colorLoc, [0.5,0.2,0,15] ); // Set color to red
+   
+		var mvW = mult( g_renderMatrix,  translate( this.x, this.y-2,  10 ) );
+		mvW = mult( mvW, scalem( 11, 11, 10 ) );
+
+		gl.bindBuffer( gl.ARRAY_BUFFER, car3Buffer );
+		gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
+
+		gl.uniformMatrix4fv(mvLoc, false, flatten(mvW));
+		gl.drawArrays( gl.TRIANGLES, 0, numCar3Vertices );
+	} 
 };

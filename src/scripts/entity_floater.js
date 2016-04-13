@@ -20,7 +20,7 @@ entity_floater.prototype.goesLeft = false;
 
 
 entity_floater.prototype.interactWithKid = function(kid, du){
-    if(Math.abs(kid.x - this.x) < 20 && !this.deadly) 
+    if(Math.abs(kid.x - this.x) < 32 && !this.deadly) 
 		if(this.goesLeft) kid.floating(-this.speed*du);
 		else kid.floating(this.speed*du);
 	kid.aboveWater = true;
@@ -48,8 +48,8 @@ entity_floater.prototype.update = function(du){
 		if		(this.counter > 90)	{this.counter 	= 0; this.z = 5;}
 		else if	(this.counter > 50)	{	
 										this.deadly = true;
-										this.z = -15 + 
-										Math.abs(70 - this.counter);
+										this.z = -5 + 
+										0.5*Math.abs(70 - this.counter);
 									}
 		if		(this.counter < 57)	this.deadly 	= false;
 	} 	else 						this.deadly 	= false;
@@ -63,16 +63,42 @@ entity_floater.prototype.render = function draw() {
     //console.log('entity_floater rendering');
     
     //Draw the walls first
-    if(this.deadly) gl.uniform4fv( colorLoc, [1,0,1,1] );
-	else if(this.sucker) gl.uniform4fv( colorLoc, [1,1,0,1] );
-	else gl.uniform4fv( colorLoc, [0,1,0,1] );
+    
+	if(this.sucker) {
+		if(this.deadly) gl.uniform4fv( colorLoc, [1,0,0,1] );
+		else			gl.uniform4fv( colorLoc, [0.7,0.1,0.5,1] );
+		
+		var mvW = mult( g_renderMatrix,  translate( this.x, this.y,  this.z - 6) );
+		mvW = mult( mvW, scalem( 10, 10, 10 ) );
+		gl.bindBuffer( gl.ARRAY_BUFFER, floater2Buffer );
+		gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
+		gl.uniformMatrix4fv(mvLoc, false, flatten(mvW));
+		gl.drawArrays( gl.TRIANGLES, 0, numFloater2Vertices );
+		
+		var mvW = mult( g_renderMatrix,  translate( this.x + 20, this.y,  this.z - 6) );
+		mvW = mult( mvW, scalem( 10, 10, 10 ) );
+		gl.bindBuffer( gl.ARRAY_BUFFER, floater2Buffer );
+		gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
+		gl.uniformMatrix4fv(mvLoc, false, flatten(mvW));
+		gl.drawArrays( gl.TRIANGLES, 0, numFloater2Vertices );
+		
+		var mvW = mult( g_renderMatrix,  translate( this.x - 20, this.y,  this.z - 6) );
+		mvW = mult( mvW, scalem( 10, 10, 10 ) );
+		gl.bindBuffer( gl.ARRAY_BUFFER, floater2Buffer );
+		gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
+		gl.uniformMatrix4fv(mvLoc, false, flatten(mvW));
+		gl.drawArrays( gl.TRIANGLES, 0, numFloater2Vertices );
+		
 	
-    var mvW = mult( g_renderMatrix,  translate( this.x, this.y,  this.z ) );
-    mvW = mult( mvW, scalem( 10, 10, 10 ) );
-
-    gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
-    gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
-
-    gl.uniformMatrix4fv(mvLoc, false, flatten(mvW));
-    gl.drawArrays( gl.TRIANGLES, 0, numCubeVertices );
+	}
+	else { 
+		gl.uniform4fv( colorLoc, [0.3,0.15,0,1] );
+	
+		var mvW = mult( g_renderMatrix,  translate( this.x, this.y,  this.z - 6) );
+		mvW = mult( mvW, scalem( 10, 10, 10 ) );
+		gl.bindBuffer( gl.ARRAY_BUFFER, floater1Buffer );
+		gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
+		gl.uniformMatrix4fv(mvLoc, false, flatten(mvW));
+		gl.drawArrays( gl.TRIANGLES, 0, numFloater1Vertices );
+	}
 };

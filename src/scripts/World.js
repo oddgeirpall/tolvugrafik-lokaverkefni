@@ -37,13 +37,13 @@ World.prototype.render = function() {
     
     for ( var i = -1; i < 2; i += 2) { // Either side of the platform
         var mvGround = mult( g_renderMatrix,  translate( -22, i*(this.startingLoc - 100), -2 ) );
-        mvGround = mult( mvGround, scalem( this.blockWidth*14, 150, 2 ) );
+        mvGround = mult( mvGround, scalem( this.blockWidth*7, 75, 2 ) );
 
-        gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
-        gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
+        gl.bindBuffer( gl.ARRAY_BUFFER, groundBuffer );
+        gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
 
         gl.uniformMatrix4fv(mvLoc, false, flatten(mvGround));
-        gl.drawArrays( gl.TRIANGLES, 0, numCubeVertices );
+        gl.drawArrays( gl.TRIANGLES, 0, numGroundVertices );
     }
     
     
@@ -87,11 +87,11 @@ World.prototype.render = function() {
     for (var i = 0; i < this.numLanes; i++) {
         for (var j = 0; j < this.numBlocks; j++) {
             var mvWater = mult( g_renderMatrix,  translate( -7*this.blockWidth + j*this.blockWidth, 
-                                this.startingLoc + (this.numLanes+1)*this.blockWidth + (i+1)*this.blockWidth, -10 ) );
-            mvWater = mult( mvWater, scalem( this.blockWidth/1.7, this.blockWidth/1.7, 10) );
+                                this.startingLoc + (this.numLanes+1)*this.blockWidth + (i+1)*this.blockWidth, -5 ) );
+            mvWater = mult( mvWater, scalem( this.blockWidth/1.7, this.blockWidth/1.7, 25) );
 
             gl.bindBuffer( gl.ARRAY_BUFFER, groundBuffer );
-            gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
+            gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
 
             gl.uniformMatrix4fv(mvLoc, false, flatten(mvWater));
             gl.drawArrays( gl.TRIANGLES, 0, numGroundVertices );

@@ -29,7 +29,7 @@ entity_kid.prototype.moveBackwards = false;
 entity_kid.prototype.jumpTimer = g_laneHeight;
 entity_kid.prototype.jumpDir = 1;
 
-entity_kid.prototype.color = [0,1,1,1];
+entity_kid.prototype.color = [1,0.9,0.8,1];
 
 entity_kid.prototype.update = function(du){
     
@@ -99,7 +99,7 @@ entity_kid.prototype.update = function(du){
         this.color[1] -= 0.02;
         this.z -= 0.5;
         if (this.z < -25) {
-            this.color = [0,1,1,1];
+            this.color = [1,0.9,0.8,1];
             entityManager.enterLevel(entityManager._level);
         }
         return;
@@ -200,15 +200,44 @@ entity_kid.prototype.render = function draw() {
     gl.drawArrays( gl.TRIANGLES, 0, numCubeVertices);
     
 	*/
-	gl.uniform4fv( colorLoc, this.color ); // Set color to aqua
+	//draw body
+	gl.uniform4fv( colorLoc, this.color ); 
 	
-	
-	var mvKid = mult( g_renderMatrix,  translate( this.x, this.y, this.z + 7) );
+	var mvKid = mult( g_renderMatrix,  translate( this.x, this.y, this.z + 12) );
     mvKid = mult( mvKid, scalem( this.halfHeight, this.halfHeight, this.halfHeight ) );
+		mvKid = mult( mvKid, rotateZ( 180 ));
 
-    gl.bindBuffer( gl.ARRAY_BUFFER, kidBuffer );
+    gl.bindBuffer( gl.ARRAY_BUFFER, kid1Buffer );
     gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
 
     gl.uniformMatrix4fv(mvLoc, false, flatten(mvKid));
-    gl.drawArrays( gl.TRIANGLES, 0, numKidVertices);
+    gl.drawArrays( gl.TRIANGLES, 0, numKid1Vertices);
+	//draw shirt
+	gl.uniform4fv( colorLoc, [0.8,0.1,0,2] ); // Set color to red
+	
+	var mvKid = mult( g_renderMatrix,  translate( this.x, this.y-2, this.z + 7) );
+    mvKid = mult( mvKid, scalem( this.halfHeight/1.4, this.halfHeight/1.4, this.halfHeight /1.4) );
+
+	
+    gl.bindBuffer( gl.ARRAY_BUFFER, kid2Buffer );
+    gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
+
+    gl.uniformMatrix4fv(mvLoc, false, flatten(mvKid));
+    gl.drawArrays( gl.TRIANGLES, 0, numKid2Vertices);
+	
+	//draw donut
+	gl.uniform4fv( colorLoc, [0.8,0.7,0,7] ); // Set color to red
+	
+	var mvKid = mult( g_renderMatrix,  translate( this.x-10, this.y+8, this.z) );
+    mvKid = mult( mvKid, scalem( this.halfHeight/1.4, this.halfHeight/1.4, this.halfHeight /1.4) );
+	mvKid = mult( mvKid, rotateZ( 180 ));
+
+    gl.bindBuffer( gl.ARRAY_BUFFER, kid3Buffer );
+    gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
+
+    gl.uniformMatrix4fv(mvLoc, false, flatten(mvKid));
+    gl.drawArrays( gl.TRIANGLES, 0, numKid3Vertices);
+	
+	
+	
 };

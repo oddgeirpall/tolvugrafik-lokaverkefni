@@ -70,7 +70,7 @@ enterLevel: function(lvl) {
     // Create playable character
     this.generateCharacter({
         y : this._world[0].startingLoc,
-        color : [0,1,1,1]
+        color : [1,0.9,0.8,1]
     });
     
     cameraPos.x = this._character[0].x;
@@ -88,7 +88,7 @@ enterLevel: function(lvl) {
         var yDisplacement = this._world[0].startingLoc + g_laneHeight*(i+1);
         for (var j = 0; j < numEnemies; j++) {
 			var temp = (690/numEnemies); 
-            var xDisplacement = util.randRange(-370 + j*temp,-300 +(j+1)*temp);
+            var xDisplacement = util.randRange(-370 + j*temp,-373 - 0.5*temp +(j+1)*temp);
             this.generateEnemy({
                 x : xDisplacement,
                 y : yDisplacement,
@@ -102,9 +102,9 @@ enterLevel: function(lvl) {
     
     for (var i = 0; i < numLanes; i++) { // Floaters
         var yDisplacement = this._world[0].startingLoc + g_laneHeight*(i+2+numLanes);
-        for (var j = 0; j < numEnemies; j++) {
-			var temp = (690/numEnemies); 
-            var xDisplacement = util.randRange(-370 + j*temp,-355 +(j+1)*temp);
+        for (var j = 0; j < 4; j++) {
+			var temp = (690/5); 
+            var xDisplacement = util.randRange(-335 + j*temp,-355 +(j+2)*temp);
             this.generateFloater({
                 x : xDisplacement,
                 y : yDisplacement,
