@@ -124,3 +124,4 @@ window.onkeydown = function(e) {
 // Other
 
 var backgroundMusic;
+var godView = false;

@@ -74,8 +74,8 @@ entity_kid.prototype.update = function(du){
             }
             
             
-            cameraPos.y += 2*du;
-            lookAtPoint.y += 2*du;
+            cameraPos.y += 2;
+            lookAtPoint.y += 2;
             
         } else {
             

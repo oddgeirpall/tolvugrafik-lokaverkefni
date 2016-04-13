@@ -234,11 +234,21 @@ main.init = function () {
                 lookAtPoint.y += 5;
                 break;
             case keyCode('G'):
-                cameraPos = {
-                    x : entityManager._character[0].x,
-                    y : -400,
-                    z : 830
-                };
+                if (godView) {
+                    godView  = false;
+                    cameraPos = {
+                        x : entityManager._character[0].x,
+                        y : -360,
+                        z : 70
+                    }
+                } else {
+                    godView = true;
+                    cameraPos = {
+                        x : entityManager._character[0].x,
+                        y : -400,
+                        z : 830
+                    };
+                }
                 break;
                 
             // Move camera (for players)
