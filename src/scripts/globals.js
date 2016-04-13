@@ -44,6 +44,12 @@ var cubeBuffer;
 var trackBuffer;
 var roofBuffer;
 var vPosition;
+var kPosition;
+var c1Position;
+var c2Position;
+var c3Position;
+var c4Position;
+var wPosition;
 var groundBuffer;
 
 var car3Buffer;
