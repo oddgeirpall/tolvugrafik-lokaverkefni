@@ -8,11 +8,13 @@ entity_kid.prototype = new Entity();
 
 entity_kid.prototype.halfHeight = g_laneHeight/6;
 
+entity_kid.prototype.lane = 0;
 entity_kid.prototype.x = 0;
 entity_kid.prototype.y = 0;
 entity_kid.prototype.z = g_laneHeight/6;
 entity_kid.prototype.wobble = 0.1;
 
+entity_kid.prototype.aboveWater = false;
 entity_kid.prototype.isJumping = false;
 entity_kid.prototype.moveRight = false;
 entity_kid.prototype.moveLeft = false;
@@ -102,9 +104,35 @@ entity_kid.prototype.update = function(du){
         
         
     }
-    
+	this.aboveWater = false;
+	this.amICollidingYo(du);
 };
 
+entity_kid.prototype.amICollidingYo = function ( du ) {
+    //console.log('entity_kid rendering');
+	this.whereAmI();
+    var carBoi = entityManager.whosInMyLane(this.lane , this, du);
+};
+
+
+entity_kid.prototype.floating = function ( speed) {
+    console.log('entity_kid rendering');
+	this.x += speed;
+	cameraPos.x += speed;
+    lookAtPoint.x += speed;
+	
+};
+
+
+entity_kid.prototype.whereAmI = function () {
+	this.lane = Math.round((this.y/50) + 5);
+	return this.lane;
+};
+
+
+entity_kid.prototype.kill = function () {
+	console.log("hella dead");
+};
 
 entity_kid.prototype.render = function draw() {
     //console.log('entity_kid rendering');

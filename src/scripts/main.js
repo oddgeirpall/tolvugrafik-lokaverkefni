@@ -178,10 +178,7 @@ main.init = function () {
 	kidBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER,kidBuffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(kidVertices), gl.STATIC_DRAW );
-		
-    kPosition = gl.getAttribLocation( program, "kPosition" );
-    gl.vertexAttribPointer( kPosition, 3, gl.FLOAT, false, 0, 0 );
-    gl.enableVertexAttribArray( kPosition );
+
 
     // VBO for the cube
     cubeBuffer = gl.createBuffer();

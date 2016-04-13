@@ -6,6 +6,7 @@ function entity_car(descr) {
 
 entity_car.prototype = new Entity();
 
+entity_car.prototype.lane = 0;
 entity_car.prototype.x = 0;
 entity_car.prototype.y = 0;
 entity_car.prototype.goesLeft = false;
@@ -23,6 +24,9 @@ entity_car.prototype.update = function(du){
     else this.x += du;	
 };
 
+entity_car.prototype.interactWithKid = function(kid, du){
+    if(Math.abs(kid.x - this.x) < 16) kid.kill();
+};
 
 entity_car.prototype.render = function draw() {
     //console.log('entity_car rendering');

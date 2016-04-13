@@ -85,7 +85,8 @@ enterLevel: function(lvl) {
             this.generateEnemy({
                 x : xDisplacement,
                 y : yDisplacement,
-                goesLeft : i%2 === 0
+                goesLeft : i%2 === 0,
+				lane : i + 1
             });
         }
     }
@@ -98,7 +99,8 @@ enterLevel: function(lvl) {
             this.generateFloater({
                 x : xDisplacement,
                 y : yDisplacement,
-                goesLeft : i%2 === 0
+                goesLeft : i%2 === 0,
+				lane: i + 2 + numLanes
             });
         }
     }
@@ -209,6 +211,20 @@ render: function() {
             aCategory[i].render();
         }
         debugY += 10;
+    }
+},
+
+whosInMyLane: function(lane, kid, du) {
+    for (var c = 0; c < this._categories.length; ++c) {
+
+        var aCategory = this._categories[c];
+
+        for (var i = 0; i < aCategory.length; ++i) {
+			var canInteract = aCategory[i].interactWithKid;
+            if(canInteract)
+				if(aCategory[i].lane === lane) 
+					aCategory[i].interactWithKid(kid, du);
+        }
     }
 }
 
