@@ -187,7 +187,7 @@ entity_kid.prototype.kill = function () {
 
 entity_kid.prototype.render = function draw() {
     //console.log('entity_kid rendering');
-    
+    /*
     gl.uniform4fv( colorLoc, this.color ); // Set color to aqua
    
     var mvKid = mult( g_renderMatrix,  translate( this.x, this.y, this.z ) );
@@ -226,4 +226,16 @@ entity_kid.prototype.render = function draw() {
     
     gl.drawArrays( gl.TRIANGLES, 0, numCubeVertices);
     
+	*/
+	gl.uniform4fv( colorLoc, this.color ); // Set color to aqua
+	
+	
+	var mvKid = mult( g_renderMatrix,  translate( this.x, this.y, this.z + 7) );
+    mvKid = mult( mvKid, scalem( this.halfHeight, this.halfHeight, this.halfHeight ) );
+
+    gl.bindBuffer( gl.ARRAY_BUFFER, kidBuffer );
+    gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
+
+    gl.uniformMatrix4fv(mvLoc, false, flatten(mvKid));
+    gl.drawArrays( gl.TRIANGLES, 0, numKidVertices);
 };

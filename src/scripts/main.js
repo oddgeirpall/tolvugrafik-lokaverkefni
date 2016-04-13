@@ -141,13 +141,24 @@ main.init = function () {
 	plyData = PR.read("src/images/kid.ply");
     kidVertices = plyData.points;
     kidNormals = plyData.normals;
+	
+	
+	
+
     //
     //  Load shaders and initialize attribute buffers
     //
     var program = initShaders( gl, "vertex-shader", "fragment-shader" );
     gl.useProgram( program );
 
+	vPosition = gl.getAttribLocation( program, "vPosition" );
+    gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
+    gl.enableVertexAttribArray( vPosition );
 	
+	treeBuffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER, treeBuffer );
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(spjaldVertices), gl.STATIC_DRAW );
+    
 	
 		 // VBO for groundStuff
     groundBuffer = gl.createBuffer();
@@ -211,6 +222,9 @@ main.init = function () {
     gl.bindBuffer( gl.ARRAY_BUFFER, cubeNormalBuffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(cNormals), gl.STATIC_DRAW);
 
+    vTexCoord = gl.getAttribLocation( program, "vTexCoord" );
+    gl.vertexAttribPointer( vTexCoord, 2, gl.FLOAT, false, 0, 0 );
+    gl.enableVertexAttribArray( vTexCoord );
 	
 	
     vPosition = gl.getAttribLocation( program, "vPosition" );
@@ -245,6 +259,17 @@ main.init = function () {
     
     
     //===================
+    // Ná í mynd úr html-skrá:
+    //
+    image = document.getElementById("texImage");
+    
+    var xIm = image.ImageData;
+    util.configureTexture( image , program);
+	
+	gl.enable( gl.BLEND );
+    gl.blendFunc( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA );
+
+    //=======+===========
     // EVENT LISTENERS
     //===================
     
@@ -342,7 +367,10 @@ main.init = function () {
                 break;
         }
     });
+	
     
     
     this._requestNextIteration();
 };
+
+
