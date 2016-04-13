@@ -173,7 +173,7 @@ function preloadDone() {
 function initLevel() {
 
     console.log('initLevel');
-    entityManager.enterLevel(1);
+    entityManager.enterLevel(2);
     
     //g_lvlLength = entityManager._world[0].blocks[13].length*(g_canvas.height/14) - g_canvas.width;
     

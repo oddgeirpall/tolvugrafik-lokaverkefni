@@ -8,16 +8,19 @@ entity_car.prototype = new Entity();
 
 entity_car.prototype.x = 0;
 entity_car.prototype.y = 0;
+entity_car.prototype.goesLeft = false;
 
 entity_car.prototype.updateInterval = 2;
 
 entity_car.prototype.update = function(du){
-    if (this.x < -100 || this.x > 100) this.updateInterval *= -1;
+    if (this.x > 320){
+		this.x = -370;
+	} else if (this.x < -370 ){
+		this.x = 320;
+	}
     
-    this.x += this.updateInterval;
-    //console.log(du);
-    
-    //console.log('entity_car updating');
+    if (this.goesLeft) this.x -= du;
+    else this.x += du;	
 };
 
 

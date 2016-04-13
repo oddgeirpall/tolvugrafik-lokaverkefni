@@ -84,7 +84,7 @@ World.prototype.render = function() {
     // Draw water
     gl.uniform4fv( colorLoc, [0,0,1,1] ); // Set color to blue
     
-    for (var i = 0; i < this.numSidewalks; i++) {
+    for (var i = 0; i < this.numLanes; i++) {
         for (var j = 0; j < this.numBlocks; j++) {
             var mvWater = mult( g_renderMatrix,  translate( -7*this.blockWidth + j*this.blockWidth, 
                                 this.startingLoc + (this.numLanes+1)*this.blockWidth + (i+1)*this.blockWidth, -10 ) );
@@ -103,13 +103,5 @@ World.prototype.generate = function() {
     
 	var totallength = (this.numSidewalks + 2*this.numLanes)*g_laneHeight;
 	this.startingLoc = -0.5*totallength + 0.5*g_laneHeight;
-    console.log(this.startingLoc);
-		//generate the Kid here
-	for(var i = 0; i < this.numLanes; i++){
-		//generate a car-lane at "startingLoc+((i+1)*g_laneHeight)"
-	}
-	//var grassLoc = startingLoc + (numberOfLanes+1)*g_laneHeight;
-	for(var i = 0; i < this.numLanes; i++){
-		//generate a river-lane at "grassLoc+((i+1)*g_laneHeight)"
-	}
+
 };

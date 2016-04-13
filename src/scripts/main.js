@@ -117,7 +117,7 @@ main.init = function () {
 
     gl.viewport( 0, 0, g_canvas.width, g_canvas.height );
     
-    gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
+    gl.clearColor( 0.4, 0.4, 0.4, 1.0 );
     
     gl.enable(gl.DEPTH_TEST);
 	
@@ -229,6 +229,13 @@ main.init = function () {
             case keyCode('O'):
                 cameraPos.y += 5;
                 lookAtPoint.y += 5;
+                break;
+            case keyCode('G'):
+                cameraPos = {
+                    x : 0,
+                    y : -400,
+                    z : 830
+                };
                 break;
                 
             // Move camera (for players)

@@ -6,6 +6,8 @@ function entity_kid(descr) {
 
 entity_kid.prototype = new Entity();
 
+entity_kid.prototype.halfHeight = g_laneHeight/2;
+
 entity_kid.prototype.x = 0;
 entity_kid.prototype.y = 0;
 entity_kid.prototype.z = g_laneHeight/2;
@@ -26,26 +28,26 @@ entity_kid.prototype.update = function(du){
         
         this.x -= 0.5*du;
         
-        if (this.z > g_laneHeight/2 + 1) this.wobble *= -1;
-        else if (this.z < g_laneHeight/2) this.wobble *= -1
+        if (this.z > this.halfHeight + 1) this.wobble *= -1;
+        else if (this.z < this.halfHeight) this.wobble *= -1
         this.z += this.wobble*du;
         
         
-        cameraPos.x = this.x;
-        lookAtPoint.x = this.x;
+        cameraPos.x -= 0.5*du;
+        lookAtPoint.x -= 0.5*du;
     }
     
     if (this.moveRight === true) {
         
         this.x += 0.5*du;
         
-        if (this.z > g_laneHeight/2 + 1) this.wobble *= -1;
-        else if (this.z < g_laneHeight/2) this.wobble *= -1
+        if (this.z > this.halfHeight + 1) this.wobble *= -1;
+        else if (this.z < this.halfHeight) this.wobble *= -1
         this.z += this.wobble*du;
         
         
-        cameraPos.x = this.x;
-        lookAtPoint.x = this.x;
+        cameraPos.x += 0.5*du;
+        lookAtPoint.x += 0.5*du;
     }
     
     
@@ -55,10 +57,10 @@ entity_kid.prototype.update = function(du){
         
         if (this.moveForward === true) {
             
-            this.y += 2*du;
-            this.jumpTimer -= 2*du;
+            this.y += 2;
+            this.jumpTimer -= 2;
             
-            if (this.z > g_laneHeight/2 + 5) this.jumpDir = -1;
+            if (this.z > this.halfHeight + 5) this.jumpDir = -1;
             
             this.z += 0.5*du*this.jumpDir;
             
@@ -68,6 +70,7 @@ entity_kid.prototype.update = function(du){
                 this.moveBackwards = false;
                 this.jumpDir = 1;
                 this.jumpTimer = g_laneHeight;
+                this.z = this.halfHeight;
             }
             
             
@@ -76,10 +79,10 @@ entity_kid.prototype.update = function(du){
             
         } else {
             
-            this.y -= 2*du;
-            this.jumpTimer -= 2*du;
+            this.y -= 2;
+            this.jumpTimer -= 2;
             
-            if (this.z > g_laneHeight/2 + 5) this.jumpDir = -1;
+            if (this.z > this.halfHeight + 5) this.jumpDir = -1;
             
             this.z += 0.5*du*this.jumpDir;
             
@@ -89,11 +92,12 @@ entity_kid.prototype.update = function(du){
                 this.moveBackwards = false;
                 this.jumpDir = 1;
                 this.jumpTimer = g_laneHeight;
+                this.z = this.halfHeight;
             }
             
             
-            cameraPos.y -= 2*du;
-            lookAtPoint.y -= 2*du;
+            cameraPos.y -= 2;
+            lookAtPoint.y -= 2;
         }
         
         
@@ -114,6 +118,6 @@ entity_kid.prototype.render = function draw() {
     gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
 
     gl.uniformMatrix4fv(mvLoc, false, flatten(mvKid));
-    gl.drawArrays( gl.TRIANGLES, 0, numCubeVertices );
+    gl.drawArrays( gl.TRIANGLES, 0, numCubeVertices);
     
 };

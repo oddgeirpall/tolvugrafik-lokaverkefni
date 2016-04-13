@@ -15,6 +15,7 @@ entity_floater.prototype.sucker;
 entity_floater.prototype.length = 2;
 entity_floater.prototype.counter = 0;
 entity_floater.prototype.deadly = false;
+entity_floater.prototype.goesLeft = false;
 
 
 entity_floater.prototype.update = function(du){
@@ -42,7 +43,8 @@ entity_floater.prototype.update = function(du){
 		if		(this.counter < 57)	this.deadly 	= false;
 	} 	else 						this.deadly 	= false;
 
-    this.x += du;
+    if (this.goesLeft) this.x -= du;
+    else this.x += du;
     
 };
 

@@ -58,6 +58,7 @@ enterLevel: function(lvl) {
     this._world = [];
     this._grid = [];
     
+    /*
     for (var i = 0; i < 5; i++) {
         //this.generateEnemy({
         //    x : util.randRange(-100, 100),
@@ -69,15 +70,54 @@ enterLevel: function(lvl) {
             y : -190 + i*75
         });
     }
-
+    */
+    
+    // Create level
     this._level = lvl;
     this.generateLevel({
         numLanes: 2 + this._level
     });
     this._world[0].generate();
+    
+    // Create playable character
     this.generateCharacter({
         y : this._world[0].startingLoc
     });
+    
+    
+    
+    // Create enemies
+    
+    var numEnemies = this._level + 3;
+    var numLanes = this._world[0].numLanes;
+    
+    for (var i = 0; i < numLanes; i++) { // Veggies
+        var yDisplacement = this._world[0].startingLoc + g_laneHeight*(i+1);
+        for (var j = 0; j < numEnemies; j++) {
+            var xDisplacement = util.randRange(-370,320);
+            this.generateEnemy({
+                x : xDisplacement,
+                y : yDisplacement,
+                goesLeft : i%2 === 0
+            });
+        }
+    }
+
+    
+    for (var i = 0; i < numLanes; i++) { // Floaters
+        var yDisplacement = this._world[0].startingLoc + g_laneHeight*(i+2+numLanes);
+        for (var j = 0; j < numEnemies; j++) {
+            var xDisplacement = util.randRange(-370,320);
+            this.generateFloater({
+                x : xDisplacement,
+                y : yDisplacement,
+                goesLeft : i%2 === 0
+            });
+        }
+    }
+
+    
+    
     this.deferredSetup();
 },
 
