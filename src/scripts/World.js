@@ -97,6 +97,27 @@ World.prototype.render = function() {
             gl.drawArrays( gl.TRIANGLES, 0, numGroundVertices );
         };
     };
+	/* bilað
+	//draw billboard
+
+    var x = image.ImageData;
+    util.configureTexture( image);	
+	
+	var mvTree = mult( g_renderMatrix,  translate( 0, 0, 20) );
+	mvTree = mult( mvTree, scalem( 100, 100 , 100) );
+	
+	gl.bindBuffer( gl.ARRAY_BUFFER, treeBuffer );
+    gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
+
+	gl.uniformMatrix4fv(mvLoc, false, flatten(mvTree));
+    gl.drawArrays( gl.TRIANGLES, 0, numTreVertices );
+	*/
+	//draw kid
+	
+	
+	
+	
+	
 };
 
 World.prototype.generate = function() {

@@ -33,8 +33,10 @@ var numCar1Vertices = 90;
 var numCar2Vertices = 138;
 var numCar3Vertices = 321;
 var numCar4Vertices = 321;
-var numKidVertices = 48;
+var numKidVertices = 876;
+var numTreVertices  = 6;
 
+var texture;
 var colorLoc;
 var mvLoc;
 var pLoc;
@@ -51,6 +53,11 @@ var c3Position;
 var c4Position;
 var wPosition;
 var groundBuffer;
+var treeBuffer;
+
+var vTexCoord;
+
+var image;
 
 var car3Buffer;
 var car2Buffer;
@@ -99,6 +106,26 @@ var cVertices = [
 ];
 
 var g_laneHeight = 50;
+
+// Mynsturhnit fyrir spjaldið
+var texCoords = [
+    vec2( 0.0, 0.0 ),
+    vec2( 1.0, 0.0 ),
+    vec2( 1.0, 1.0 ),
+    vec2( 1.0, 1.0 ),
+    vec2( 0.0, 1.0 ),
+    vec2( 0.0, 0.0 )
+];
+
+// Tveir þríhyrningar sem mynda spjald í z=0 planinu
+var spjaldVertices = [
+    vec4( -1.0, -1.0, 0.0, 1.0 ),
+    vec4(  1.0, -1.0, 0.0, 1.0 ),
+    vec4(  1.0,  1.0, 0.0, 1.0 ),
+    vec4(  1.0,  1.0, 0.0, 1.0 ),
+    vec4( -1.0,  1.0, 0.0, 1.0 ),
+    vec4( -1.0, -1.0, 0.0, 1.0 )
+];
 
 // Camera location and lookat
 var cameraPos = {
