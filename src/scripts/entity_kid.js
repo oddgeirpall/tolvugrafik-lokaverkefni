@@ -34,16 +34,16 @@ entity_kid.prototype.color = [1,0.9,0.8,1];
 entity_kid.prototype.update = function(du){
     
     if (lookLeft === true) {
-        if (lookAtPoint.x > -300) lookAtPoint.x -= 10*du;
+        if (lookAtPoint.x > -500) lookAtPoint.x -= 30*du;
     } else if (lookAtPoint.x < this.x) {
-        if (lookAtPoint.x + 10*du > this.x) lookAtPoint.x = this.x;
-            else lookAtPoint.x += 10*du;
+        if (lookAtPoint.x + 30*du > this.x) lookAtPoint.x = this.x;
+            else lookAtPoint.x += 30*du;
     }
     if (lookRight === true) {
-        if (lookAtPoint.x < 300) lookAtPoint.x += 10*du;
+        if (lookAtPoint.x < 500) lookAtPoint.x += 30*du;
     } else if (lookAtPoint.x > this.x) {
-        if (lookAtPoint.x - 10*du < this.x) lookAtPoint.x = this.x;
-            else lookAtPoint.x -= 10*du;
+        if (lookAtPoint.x - 30*du < this.x) lookAtPoint.x = this.x;
+            else lookAtPoint.x -= 30*du;
     }
     
     if (this.isJumping === true) {
@@ -187,46 +187,7 @@ entity_kid.prototype.kill = function () {
 
 entity_kid.prototype.render = function draw() {
     //console.log('entity_kid rendering');
-    /*
-    gl.uniform4fv( colorLoc, this.color ); // Set color to aqua
-   
-    var mvKid = mult( g_renderMatrix,  translate( this.x, this.y, this.z ) );
-    mvKid = mult( mvKid, scalem( 2*this.halfHeight, 2*this.halfHeight, 2*this.halfHeight ) );
 
-    gl.bindBuffer( gl.ARRAY_BUFFER, cubeBuffer );
-    gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
-    
-    gl.bindBuffer( gl.ARRAY_BUFFER, cubeNormalBuffer );
-    gl.vertexAttribPointer( nPosition, 3, gl.FLOAT, false, 0, 0);
-    
-    cubeNormalMatrix = [
-        vec3(mvKid[0][0], mvKid[0][1], mvKid[0][2],
-             mvKid[0][0], mvKid[1][1], mvKid[1][2],
-             mvKid[0][0], mvKid[2][1], mvKid[2][2])
-    ];
-    
-    var lightAmbient = vec4(1.0, 1.0, 1.0, 1.0 );
-    var lightDiffuse = vec4( 1.0, 1.0, 1.0, 1.0 );
-    var lightSpecular = vec4( 1.0, 1.0, 1.0, 1.0 );
-
-    var materialAmbient = vec4( 0, 0.5, 0.5, 1.0 );
-    var materialDiffuse = vec4( 0, 1.0, 1.0, 1.0 );
-    var materialSpecular = vec4( 1.0, 1.0, 1.0, 1.0 );
-    
-    ambientProduct = mult(lightAmbient, materialAmbient);
-    diffuseProduct = mult(lightDiffuse, materialDiffuse);
-    specularProduct = mult(lightSpecular, materialSpecular);
-    
-    gl.uniform4fv( gl.getUniformLocation(program, "ambientProduct"), flatten(ambientProduct) );
-    gl.uniform4fv( gl.getUniformLocation(program, "diffuseProduct"), flatten(diffuseProduct) );
-    gl.uniform4fv( gl.getUniformLocation(program, "specularProduct"), flatten(specularProduct) );
-
-    gl.uniformMatrix4fv(mvLoc, false, flatten(mvKid));
-    gl.uniformMatrix3fv(normalLoc, false, flatten(cubeNormalMatrix));
-    
-    gl.drawArrays( gl.TRIANGLES, 0, numCubeVertices);
-    
-	*/
 	//draw body
 	gl.uniform4fv( colorLoc, this.color ); 
 	

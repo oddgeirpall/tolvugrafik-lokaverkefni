@@ -74,7 +74,7 @@ enterLevel: function(lvl) {
     });
     
     cameraPos.x = this._character[0].x;
-    cameraPos.y = this._character[0].y - 110;
+    cameraPos.y = this._character[0].y - 80;
     lookAtPoint.reset();
     
     

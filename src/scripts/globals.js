@@ -209,11 +209,11 @@ var spjaldVertices = [
 var cameraPos = {
     x : 0.0,
     y : 250.0,
-    z : 70.0,
+    z : 50.0,
     startPos : function() {
         this.x = 0.0;
         this.y = 350.0;
-        this.z = 70.0;
+        this.z = 50.0;
     }
 };
 

@@ -46,13 +46,13 @@ function updateSimulation(du) {
         cameraPos.startPos();
         lookAtPoint.startPos();
     }
-	var counter = 10;
+	
     if (!g_gameStarted) {
         zooming = true;
         if (zooming) {
             cameraPos.y -= 10;          
         }
-        if (cameraPos.y === -360) {
+        if (cameraPos.y === -300) {
             g_gameStarted = true;
         } 
     }
