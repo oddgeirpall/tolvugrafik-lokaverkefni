@@ -45,18 +45,19 @@ function updateSimulation(du) {
         initLevel();
     }
     
+    var charX = entityManager._character[0].x;
     
     if (lookLeft === true) {
-        if (lookAtPoint.x > -150) lookAtPoint.x -= 5*du;
-    } else if (lookAtPoint.x < 0) {
-        if (lookAtPoint.x + 5*du > 0) lookAtPoint.x = 0;
-            else lookAtPoint.x += 5*du;
+        if (lookAtPoint.x > -300) lookAtPoint.x -= 5*du;
+    } else if (lookAtPoint.x < charX) {
+        if (lookAtPoint.x + 10*du > charX) lookAtPoint.x = charX;
+            else lookAtPoint.x += 10*du;
     }
     if (lookRight === true) {
-        if (lookAtPoint.x < 150) lookAtPoint.x += 5*du;
-    } else if (lookAtPoint.x > 0) {
-        if (lookAtPoint.x - 5*du < 0) lookAtPoint.x = 0;
-            else lookAtPoint.x -= 5*du;
+        if (lookAtPoint.x < 300) lookAtPoint.x += 5*du;
+    } else if (lookAtPoint.x > charX) {
+        if (lookAtPoint.x - 10*du < charX) lookAtPoint.x = charX;
+            else lookAtPoint.x -= 10*du;
     }
     
     //console.log(lookAtPoint.x);

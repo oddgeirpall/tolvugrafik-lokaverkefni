@@ -97,8 +97,8 @@ var g_laneHeight = 50;
 // Camera location and lookat
 var cameraPos = {
     x : 0.0,
-    y : -600.0,
-    z : 250.0
+    y : -360.0,
+    z : 70.0
 };
 
 var lookAtPoint = {

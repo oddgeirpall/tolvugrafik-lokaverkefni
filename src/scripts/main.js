@@ -230,6 +230,7 @@ main.init = function () {
                 cameraPos.y += 5;
                 lookAtPoint.y += 5;
                 break;
+                
             // Move camera (for players)
             case keyCode('Q'):
                 lookLeft = true;
@@ -245,12 +246,41 @@ main.init = function () {
             case keyCode('F'):
                 if (cameraPos.z > 50) cameraPos.z -= 5;
                 break;
+                
+            // Move character
+            case keyCode('A'):
+                if (!entityManager._character[0].isJumping) entityManager._character[0].moveLeft = true;
+                break;
+            case keyCode('D'):
+                if (!entityManager._character[0].isJumping) entityManager._character[0].moveRight = true;
+                break;
+            case keyCode('W'):
+                if (!entityManager._character[0].isJumping) entityManager._character[0].moveForward = true;
+                break;
+            case keyCode('S'):
+                if (!entityManager._character[0].isJumping) entityManager._character[0].moveBackwards = true;
+                break;
         }
     });
     
     window.addEventListener('keyup', function(evt) {
-        lookLeft = false;
-        lookRight = false;
+        switch (evt.keyCode) {
+            // Camera logistics
+            case keyCode('Q'):
+                lookLeft = false;
+                break;
+            case keyCode('E'):
+                lookRight = false;
+                break;
+                
+           // Player logistics
+           case keyCode('A'):
+                entityManager._character[0].moveLeft = false;
+                break;
+            case keyCode('D'):
+                entityManager._character[0].moveRight = false;
+                break;
+        }
     });
     
     

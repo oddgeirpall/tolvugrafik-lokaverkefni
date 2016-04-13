@@ -57,11 +57,6 @@ enterLevel: function(lvl) {
     this._objects = [];
     this._world = [];
     this._grid = [];
-
-    
-
-    if(this._character.length === 0) this.generateCharacter();
-    //this._character[0].reset();
     
     for (var i = 0; i < 5; i++) {
         //this.generateEnemy({
@@ -80,6 +75,9 @@ enterLevel: function(lvl) {
         numLanes: 2 + this._level
     });
     this._world[0].generate();
+    this.generateCharacter({
+        y : this._world[0].startingLoc
+    });
     this.deferredSetup();
 },
 
@@ -89,7 +87,7 @@ giveMeZelda : function(descr) {
 },
 
 generateCharacter : function(descr) {
-    //this._character.push(new Zelda(descr));
+    this._character.push(new entity_kid(descr));
 },
 
 generateFloater : function(descr) {
