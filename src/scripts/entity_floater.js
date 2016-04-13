@@ -20,7 +20,7 @@ entity_floater.prototype.goesLeft = false;
 
 
 entity_floater.prototype.interactWithKid = function(kid, du){
-    if(Math.abs(kid.x - this.x) < 32 && !this.deadly) 
+    if(Math.abs(kid.x - this.x) < 16*this.length && !this.deadly) 
 		if(this.goesLeft) kid.floating(-this.speed*du);
 		else kid.floating(this.speed*du);
 	kid.aboveWater = true;
@@ -95,7 +95,7 @@ entity_floater.prototype.render = function draw() {
 		gl.uniform4fv( colorLoc, [0.3,0.15,0,1] );
 	
 		var mvW = mult( g_renderMatrix,  translate( this.x, this.y,  this.z - 6) );
-		mvW = mult( mvW, scalem( 10, 10, 10 ) );
+		mvW = mult( mvW, scalem( 5*this.length, 10, 10 ) );
 		gl.bindBuffer( gl.ARRAY_BUFFER, floater1Buffer );
 		gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
 		gl.uniformMatrix4fv(mvLoc, false, flatten(mvW));

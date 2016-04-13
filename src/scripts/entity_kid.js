@@ -165,7 +165,7 @@ entity_kid.prototype.amICollidingYo = function ( du ) {
 
 
 entity_kid.prototype.floating = function ( speed) {
-    if(this.floating){
+    if(!this.floatingA){
 		this.x += speed;
 		cameraPos.x += speed;
 		lookAtPoint.x += speed;

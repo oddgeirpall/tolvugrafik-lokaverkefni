@@ -94,7 +94,7 @@ enterLevel: function(lvl) {
                 y : yDisplacement,
                 goesLeft : i%2 === 0,
 				lane : i + 1,
-				speed : 0.9 + (((i+i)%3) * 0.2) 
+				speed : 0.6 + (((i+i)%3) * 0.2) 
             });
         }
     }
@@ -108,6 +108,7 @@ enterLevel: function(lvl) {
             this.generateFloater({
                 x : xDisplacement,
                 y : yDisplacement,
+				length : 1.5 + Math.random()*1.5,
                 goesLeft : i%2 === 0,
 				lane: i + 2 + numLanes,
 				speed : 0.9 + (((i+i)%3) * 0.2)
