@@ -154,7 +154,7 @@ entity_kid.prototype.update = function(du){
         this._isDeadNow = true;
         this.isDrowning = true;
     }
-	if(this.x < -370 || this.x > 320) console.log("kabúmm");
+	if(this.x < -370 || this.x > 320) this._isDeadNow;
 };
 
 entity_kid.prototype.amICollidingYo = function ( du ) {

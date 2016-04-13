@@ -46,8 +46,9 @@ function updateSimulation(du) {
         cameraPos.startPos();
         lookAtPoint.startPos();
     }
+	var counter = 10;
     if (!g_gameStarted) {
-        if (eatKey(KEY_SPACE)) zooming = true;
+        zooming = true;
         if (zooming) {
             cameraPos.y -= 10;          
         }
@@ -113,7 +114,7 @@ function renderSimulation() {
     
     g_renderMatrix = mat4();
     g_renderMatrix = lookAt( vec3(cameraPos.x, cameraPos.y, cameraPos.z), vec3(lookAtPoint.x, lookAtPoint.y, lookAtPoint.z), vec3(0.0, 0.0, 1.0) );
-
+	
     entityManager.render();
 };
 

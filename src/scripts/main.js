@@ -287,8 +287,8 @@ main.init = function () {
     //===================
     // Ná í mynd úr html-skrá:
     //
-    image = document.getElementById("texImage");
-    
+     var image = document.getElementById("texImage");
+
     var xIm = image.ImageData;
     util.configureTexture( image , program);
 	
