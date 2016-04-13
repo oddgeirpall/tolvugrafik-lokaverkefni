@@ -14,6 +14,8 @@ entity_kid.prototype.y = 0;
 entity_kid.prototype.z = g_laneHeight/6;
 entity_kid.prototype.wobble = 0.1;
 
+
+entity_kid.prototype.floatingA = false;
 entity_kid.prototype.aboveWater = false;
 entity_kid.prototype.isJumping = false;
 entity_kid.prototype.moveRight = false;
@@ -104,8 +106,12 @@ entity_kid.prototype.update = function(du){
         
         
     }
+	this.floatingA = false;
 	this.aboveWater = false;
 	this.amICollidingYo(du);
+
+	if(!this.floatingA && this.aboveWater) console.log("glúbb glúbb");
+	if(this.x < -370 || this.x > 320) console.log("kabúmm");
 };
 
 entity_kid.prototype.amICollidingYo = function ( du ) {
@@ -116,11 +122,10 @@ entity_kid.prototype.amICollidingYo = function ( du ) {
 
 
 entity_kid.prototype.floating = function ( speed) {
-    console.log('entity_kid rendering');
-	this.x += speed;
+    this.x += speed;
 	cameraPos.x += speed;
     lookAtPoint.x += speed;
-	
+	this.floatingA = true;
 };
 
 

@@ -20,11 +20,10 @@ entity_floater.prototype.goesLeft = false;
 
 
 entity_floater.prototype.interactWithKid = function(kid, du){
-    if(Math.abs(kid.x - this.x) < 20) 
+    if(Math.abs(kid.x - this.x) < 20 && !this.deadly) 
 		if(this.goesLeft) kid.floating(-this.speed*du);
 		else kid.floating(this.speed*du);
 	kid.aboveWater = true;
-	console.log(Math.abs(kid.x - this.x));
 	
 };
 
