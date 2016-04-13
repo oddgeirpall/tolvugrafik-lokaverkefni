@@ -57,6 +57,7 @@ enterLevel: function(lvl) {
     this._objects = [];
     this._world = [];
     this._grid = [];
+    this._character = [];
     
     
     // Create level
@@ -68,8 +69,13 @@ enterLevel: function(lvl) {
     
     // Create playable character
     this.generateCharacter({
-        y : this._world[0].startingLoc
+        y : this._world[0].startingLoc,
+        color : [0,1,1,1]
     });
+    
+    cameraPos.x = this._character[0].x;
+    cameraPos.y = this._character[0].y - 110;
+    lookAtPoint.reset();
     
     
     

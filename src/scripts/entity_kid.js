@@ -8,6 +8,9 @@ entity_kid.prototype = new Entity();
 
 entity_kid.prototype.halfHeight = g_laneHeight/6;
 
+entity_kid.prototype.isDrowning = false;
+entity_kid.prototype.isExploding = false;
+
 entity_kid.prototype.lane = 0;
 entity_kid.prototype.x = 0;
 entity_kid.prototype.y = 0;
@@ -30,41 +33,18 @@ entity_kid.prototype.color = [0,1,1,1];
 
 entity_kid.prototype.update = function(du){
     
-    if (this._isDeadNow) {
-        this.color[1] -= 0.02;
-        this.color[2] -= 0.02;
-        this.z -= 0.5;
-        return;
+    if (lookLeft === true) {
+        if (lookAtPoint.x > -300) lookAtPoint.x -= 10*du;
+    } else if (lookAtPoint.x < this.x) {
+        if (lookAtPoint.x + 10*du > this.x) lookAtPoint.x = this.x;
+            else lookAtPoint.x += 10*du;
     }
-    
-    if (this.moveLeft === true) {
-        
-        this.x -= 0.8*du;
-        
-        if (this.z > this.halfHeight + 1) this.wobble *= -1;
-        else if (this.z < this.halfHeight) this.wobble *= -1
-        this.z += this.wobble*du;
-        
-        
-        cameraPos.x -= 0.8*du;
-        lookAtPoint.x -= 0.*du;
+    if (lookRight === true) {
+        if (lookAtPoint.x < 300) lookAtPoint.x += 10*du;
+    } else if (lookAtPoint.x > this.x) {
+        if (lookAtPoint.x - 10*du < this.x) lookAtPoint.x = this.x;
+            else lookAtPoint.x -= 10*du;
     }
-    
-    if (this.moveRight === true) {
-        
-        this.x += 0.8*du;
-        
-        if (this.z > this.halfHeight + 1) this.wobble *= -1;
-        else if (this.z < this.halfHeight) this.wobble *= -1
-        this.z += this.wobble*du;
-        
-        
-        cameraPos.x += 0.8*du;
-        lookAtPoint.x += 0.8*du;
-    }
-    
-    
-    if (this.moveBackwards || this.moveForward) this.isJumping = true;
     
     if (this.isJumping === true) {
         
@@ -113,13 +93,67 @@ entity_kid.prototype.update = function(du){
             lookAtPoint.y -= 2;
         }
         
-        
     }
+    
+    if (this.isDrowning) {
+        this.color[1] -= 0.02;
+        this.z -= 0.5;
+        if (this.z < -25) {
+            this.color = [0,1,1,1];
+            entityManager.enterLevel(entityManager._level);
+        }
+        return;
+    }
+    
+    if (this._isDeadNow) {
+        this.color[1] -= 0.02;
+        this.color[2] -= 0.02;
+        this.z -= 0.5;
+        if (this.z < -25) {
+            entityManager.enterLevel(entityManager._level);
+        }
+        return;
+    }
+    
+    if (this.moveLeft === true) {
+        
+        this.x -= 0.8*du;
+        
+        if (this.z > this.halfHeight + 1) this.wobble *= -1;
+        else if (this.z < this.halfHeight) this.wobble *= -1
+        this.z += this.wobble*du;
+        
+        
+        cameraPos.x -= 0.8*du;
+        lookAtPoint.x -= 0.*du;
+    }
+    
+    if (this.moveRight === true) {
+        
+        this.x += 0.8*du;
+        
+        if (this.z > this.halfHeight + 1) this.wobble *= -1;
+        else if (this.z < this.halfHeight) this.wobble *= -1
+        this.z += this.wobble*du;
+        
+        
+        cameraPos.x += 0.8*du;
+        lookAtPoint.x += 0.8*du;
+    }
+    
+    
+    if (this.moveBackwards || this.moveForward) this.isJumping = true;
+    
+    
+        
 	this.floatingA = false;
 	this.aboveWater = false;
 	this.amICollidingYo(du);
 
-	if(!this.floatingA && this.aboveWater) console.log("glúbb glúbb");
+	if(!this.floatingA && this.aboveWater) {
+        this._isDeadNow = true;
+        this.isDrowning = true;
+    }
 	if(this.x < -370 || this.x > 320) console.log("kabúmm");
 };
 
@@ -141,7 +175,7 @@ entity_kid.prototype.floating = function ( speed) {
 
 
 entity_kid.prototype.whereAmI = function () {
-	this.lane = Math.round((this.y/50) + 5);
+	this.lane = Math.round((this.y/50) + 3 + entityManager._level);
 	return this.lane;
 };
 

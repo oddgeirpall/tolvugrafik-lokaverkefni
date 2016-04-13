@@ -43,22 +43,29 @@ function updateSimulation(du) {
     if (g_newGame) {
         g_newGame = false;
         initLevel();
+        cameraPos.startPos();
+        lookAtPoint.startPos();
+    }
+    if (!g_gameStarted) {
+        if (eatKey(KEY_SPACE)) zooming = true;
+        if (zooming) {
+            cameraPos.y -= 10;
+        }
+        if (cameraPos.y === -360) {
+            g_gameStarted = true;
+        } 
     }
     
-    var charX = entityManager._character[0].x;
     
-    if (lookLeft === true) {
-        if (lookAtPoint.x > -300) lookAtPoint.x -= 10*du;
-    } else if (lookAtPoint.x < charX) {
-        if (lookAtPoint.x + 10*du > charX) lookAtPoint.x = charX;
-            else lookAtPoint.x += 10*du;
+    var char = entityManager._character[0];
+    var world = entityManager._world[0];
+    var lvl = entityManager._level
+    
+    if (char.y > world.startingLoc + (2+(lvl+2)*2)*g_laneHeight) {
+        entityManager.enterLevel(lvl+1);
     }
-    if (lookRight === true) {
-        if (lookAtPoint.x < 300) lookAtPoint.x += 10*du;
-    } else if (lookAtPoint.x > charX) {
-        if (lookAtPoint.x - 10*du < charX) lookAtPoint.x = charX;
-            else lookAtPoint.x -= 10*du;
-    }
+    
+    
     
     //console.log(lookAtPoint.x);
     entityManager.update(du); 
@@ -97,6 +104,7 @@ function processDiagnostics() {
 
 // GAME-SPECIFIC RENDERING
 var g_newGame = true;
+var g_gameStarted = false;
 
 
 function renderSimulation() {
@@ -174,7 +182,7 @@ function preloadDone() {
 function initLevel() {
 
     console.log('initLevel');
-    entityManager.enterLevel(2);
+    entityManager.enterLevel(1);
     
     //backgroundMusic.pause();
 	

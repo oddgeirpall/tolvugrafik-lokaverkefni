@@ -103,14 +103,29 @@ var g_laneHeight = 50;
 // Camera location and lookat
 var cameraPos = {
     x : 0.0,
-    y : -360.0,
-    z : 70.0
+    y : 250.0,
+    z : 70.0,
+    startPos : function() {
+        this.x = 0.0;
+        this.y = 350.0;
+        this.z = 70.0;
+    }
 };
 
 var lookAtPoint = {
     x : 0.0,
     y : 1.0,
-    z : 0.0
+    z : 0.0,
+    reset : function() {
+        this.x = 0.0;
+        this.y = 1.0;
+        this.z = 0.0;
+    },
+    startPos : function() {
+        this.x = 0.0;
+        this.y = 500.0;
+        this.z = 0.0;
+    } 
 }
 
 var lookLeft = false;
@@ -125,3 +140,4 @@ window.onkeydown = function(e) {
 
 var backgroundMusic;
 var godView = false;
+var zooming = false;

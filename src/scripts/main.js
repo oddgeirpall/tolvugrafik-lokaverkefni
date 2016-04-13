@@ -235,7 +235,7 @@ main.init = function () {
                     godView  = false;
                     cameraPos = {
                         x : entityManager._character[0].x,
-                        y : -360,
+                        y : entityManager._character[0].y-110,
                         z : 70
                     }
                 } else {
