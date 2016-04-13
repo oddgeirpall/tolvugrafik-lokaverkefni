@@ -26,7 +26,16 @@ entity_kid.prototype.moveBackwards = false;
 entity_kid.prototype.jumpTimer = g_laneHeight;
 entity_kid.prototype.jumpDir = 1;
 
+entity_kid.prototype.color = [0,1,1,1];
+
 entity_kid.prototype.update = function(du){
+    
+    if (this._isDeadNow) {
+        this.color[1] -= 0.02;
+        this.color[2] -= 0.02;
+        this.z -= 0.5;
+        return;
+    }
     
     if (this.moveLeft === true) {
         
@@ -137,12 +146,13 @@ entity_kid.prototype.whereAmI = function () {
 
 entity_kid.prototype.kill = function () {
 	console.log("hella dead");
+    this._isDeadNow = true;
 };
 
 entity_kid.prototype.render = function draw() {
     //console.log('entity_kid rendering');
     
-    gl.uniform4fv( colorLoc, [0,1,1,1] ); // Set color to aqua
+    gl.uniform4fv( colorLoc, this.color ); // Set color to aqua
    
     var mvKid = mult( g_renderMatrix,  translate( this.x, this.y, this.z ) );
     mvKid = mult( mvKid, scalem( 2*this.halfHeight, 2*this.halfHeight, 2*this.halfHeight ) );
