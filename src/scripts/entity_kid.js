@@ -236,6 +236,12 @@ entity_kid.prototype.render = function draw() {
 
     gl.bindBuffer( gl.ARRAY_BUFFER, kid1Buffer );
     gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
+    
+    kid1NormalMatrix = [
+        vec3(mvKid[0][0], mvKid[0][1], mvKid[0][2],
+             mvKid[0][0], mvKid[1][1], mvKid[1][2],
+             mvKid[0][0], mvKid[2][1], mvKid[2][2])
+    ];
 
     gl.uniformMatrix4fv(mvLoc, false, flatten(mvKid));
     gl.drawArrays( gl.TRIANGLES, 0, numKid1Vertices);
