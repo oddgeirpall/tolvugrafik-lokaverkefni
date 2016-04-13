@@ -28,28 +28,28 @@ entity_kid.prototype.update = function(du){
     
     if (this.moveLeft === true) {
         
-        this.x -= 0.5*du;
+        this.x -= 0.8*du;
         
         if (this.z > this.halfHeight + 1) this.wobble *= -1;
         else if (this.z < this.halfHeight) this.wobble *= -1
         this.z += this.wobble*du;
         
         
-        cameraPos.x -= 0.5*du;
-        lookAtPoint.x -= 0.5*du;
+        cameraPos.x -= 0.8*du;
+        lookAtPoint.x -= 0.*du;
     }
     
     if (this.moveRight === true) {
         
-        this.x += 0.5*du;
+        this.x += 0.8*du;
         
         if (this.z > this.halfHeight + 1) this.wobble *= -1;
         else if (this.z < this.halfHeight) this.wobble *= -1
         this.z += this.wobble*du;
         
         
-        cameraPos.x += 0.5*du;
-        lookAtPoint.x += 0.5*du;
+        cameraPos.x += 0.8*du;
+        lookAtPoint.x += 0.8*du;
     }
     
     
@@ -62,9 +62,9 @@ entity_kid.prototype.update = function(du){
             this.y += 2;
             this.jumpTimer -= 2;
             
-            if (this.z > this.halfHeight + 5) this.jumpDir = -1;
+            if (this.z > this.halfHeight + 6) this.jumpDir = -1;
             
-            this.z += 0.5*du*this.jumpDir;
+            this.z += 0.5*this.jumpDir;
             
             if (this.jumpTimer <= 0) {
                 this.isJumping = false;
@@ -84,9 +84,9 @@ entity_kid.prototype.update = function(du){
             this.y -= 2;
             this.jumpTimer -= 2;
             
-            if (this.z > this.halfHeight + 5) this.jumpDir = -1;
+            if (this.z > this.halfHeight + 6) this.jumpDir = -1;
             
-            this.z += 0.5*du*this.jumpDir;
+            this.z += 0.5*this.jumpDir;
             
             if (this.jumpTimer <= 0) {
                 this.isJumping = false;
